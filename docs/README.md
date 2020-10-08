@@ -16,4 +16,29 @@ Postman right now focuses on the following functionalities.
     - UI advancements
     are possible.
 
+## User journey flow 🚗
 
+<img src="./images/workflow.png" alt="WorkFlow">
+created in https://app.diagrams.net/
+
+## Technical Stack 🧰 
+
+### FrontEnd 
+
+- React 16
+- Ant Design 4.66
+- State management library used : None
+MyPOSTMAN functionality scope is limited right now and we might use Redux in future.
+- CSS - Styles file specified in the respective folder for better readability.
+
+### Backend
+
+- NodeJS
+- ExpressJS
+- MongoDB
+
+### Authorization
+
+- Login screen is displayed at prior of application screen.
+- User is autorised at the login.
+- For every subsequent request, user credentials in the form of JWT is sent along with requests.
