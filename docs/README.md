@@ -1,5 +1,5 @@
 # MyPOSTMAN 🚀
-
+// TODO : Add logo here once completed
 
 ## Scope
 
@@ -88,3 +88,9 @@ MyPOSTMAN functionality scope is limited right now and we might use Redux in fut
     - params - userId, token
     - url - https://infinity-dark-mode-api.herokuapp.com/api/v1/requests?userId=${userId} 
 
+### Contribute
+
+To be able to contribute, you should be at ease with React and javascript.
+
+- git clone
+- npm install
