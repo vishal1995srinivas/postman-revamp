@@ -42,3 +42,17 @@ MyPOSTMAN functionality scope is limited right now and we might use Redux in fut
 - Login screen is displayed at prior of application screen.
 - User is autorised at the login.
 - For every subsequent request, user credentials in the form of JWT is sent along with requests.
+
+### Component Design 
+
+- Overall Components 
+    <img src = "./images/compoDesign.png">
+
+- Sidebar Component Design
+     <img src = "./images/sidebar.png">
+
+- Body Component Design 
+    <img src = "./images/body.png">
+
+- Response and other Components Design
+    <img src = "./images/others.png">
