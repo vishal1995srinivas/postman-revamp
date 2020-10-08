@@ -56,3 +56,35 @@ MyPOSTMAN functionality scope is limited right now and we might use Redux in fut
 
 - Response and other Components Design
     <img src = "./images/others.png">
+
+### Backend API's
+- Adding Request to Collection
+    - PUT request
+    - params - request, token
+    - url  - https://infinity-dark-mode-api.herokuapp.com/api/v1/collections 
+
+- Create collection
+    - POST request
+    - params - userId, token, collectionName
+    - url - https://infinity-dark-mode-api.herokuapp.com/api/v1/collections
+
+- Create Request
+    - POST request
+    - params - token, bodyData
+    - url - https://infinity-dark-mode-api.herokuapp.com/api/v1/requests
+
+- Delete Collection By Id
+    - DELETE request
+    - params - token, collectionId
+    - url - https://infinity-dark-mode-api.herokuapp.com/api/v1/collections/${collectionId}
+
+- Get collections By Id
+    - GET request
+    - params - userId, token
+    - url - https://infinity-dark-mode-api.herokuapp.com/api/v1/collections?userId=${userId}
+
+- Get History 
+    - GET request
+    - params - userId, token
+    - url - https://infinity-dark-mode-api.herokuapp.com/api/v1/requests?userId=${userId} 
+
