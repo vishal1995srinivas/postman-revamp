@@ -1,6 +1,15 @@
 .header {
 	color: #ffffff;
+	display: flex;
+	justify-content: space-between;
 }
 .logoImg {
 	width: 5vw;
+}
+
+.dropdown {
+	color: #ffffff;
+}
+.loginInfo {
+	background-color: aquamarine;
 }

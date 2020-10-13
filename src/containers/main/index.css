@@ -6,16 +6,11 @@
 	background: #1a1a2e !important;
 }
 .ant-layout-footer {
-	background: #7dbcea !important;
-	color: #fff;
-	height: 10vh !important;
+	background: #1a1a2e !important;
+	color: #fff !important;
+	height: 5vh !important;
 }
-[data-theme="dark"] .ant-layout-header {
-	background: #6aa0c7;
-}
-[data-theme="dark"] .ant-layout-footer {
-	background: #6aa0c7;
-}
+
 .ant-layout-footer {
 	line-height: 1.5;
 }
@@ -25,10 +20,11 @@
 [data-theme="dark"] .ant-layout-sider {
 	background: #3499ec;
 }
+
 .ant-layout-content {
-	background: rgba(16, 142, 233, 1);
+	background: #16213e;
 	color: #fff;
-	min-height: 80vh !important;
+	min-height: 85vh !important;
 }
 [data-theme="dark"] .ant-layout-content {
 	background: #107bcb;
@@ -36,17 +32,25 @@
 .sidebar {
 	min-width: 25vw;
 	min-height: 80vh;
-	background-color: #3499ec;
+	background-color: #1b1c1d;
+	border: 2px solid black;
 }
 .sidebarOpen {
 	min-width: 25vw;
 	min-height: 80vh;
-	background-color: #3499ec;
+	background-color: #1b1c1d;
+	border: 2px solid black;
 }
 
 @media (min-width: 320px) and (max-width: 1025px) {
 	.sidebar {
 		display: none;
+	}
+	.sidebarOpen {
+		min-width: 50vw;
+		min-height: 80vh;
+		background-color: #16213e;
+		border: 2px solid black;
 	}
 
 	.ant-layout-content {

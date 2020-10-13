@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import Body from '../body';
 import Sidebar from '../sidebar';
+import Response from '../response';
+import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 const { Content } = Layout;
 class Main extends Component {
@@ -28,6 +30,7 @@ class Main extends Component {
 						</div>
 						<Content>
 							<Body sidebar={sidebar} onClickSidebarIcon={onClickSidebarIcon} />
+							<Response />
 						</Content>
 					</div>
 				</Layout>

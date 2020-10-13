@@ -1,6 +1,10 @@
 .openSidebar {
 	display: none;
 }
+.content {
+	min-height: 44vh;
+	border: 2px solid black;
+}
 @media (min-width: 320px) and (max-width: 1025px) {
 	.openSidebar {
 		display: inline;

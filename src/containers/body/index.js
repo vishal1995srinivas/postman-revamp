@@ -15,8 +15,8 @@ export class Body extends Component {
 		const { onSideBarIconClick } = this;
 		const { sidebar } = this.props;
 		return (
-			<div>
-				<div id="content">
+			<div className="content">
+				<div>
 					<span className="slide">
 						<FontAwesomeIcon
 							className="openSidebar"
@@ -24,6 +24,7 @@ export class Body extends Component {
 							onClick={onSideBarIconClick}
 						/>
 					</span>
+					<div>Body</div>
 				</div>
 			</div>
 		);
