@@ -9,6 +9,7 @@
 	background: #1a1a2e !important;
 	color: #fff !important;
 	height: 5vh !important;
+	border: 2px solid black;
 }
 
 .ant-layout-footer {
@@ -34,12 +35,14 @@
 	min-height: 80vh;
 	background-color: #1b1c1d;
 	border: 2px solid black;
+	overflow: scroll;
 }
 .sidebarOpen {
 	min-width: 25vw;
-	min-height: 80vh;
+	/* min-height: 80%; */
 	background-color: #1b1c1d;
 	border: 2px solid black;
+	overflow: scroll;
 }
 
 @media (min-width: 320px) and (max-width: 1025px) {
@@ -48,10 +51,13 @@
 	}
 	.sidebarOpen {
 		min-width: 50vw;
-		min-height: 80vh;
-		background-color: #16213e;
-		border: 2px solid black;
 	}
+	/* .sidebarOpen { */
+	/* min-width: 50vw; */
+	/* min-height: 70vh; */
+	/* background-color: #16213e; */
+	/* border: 2px solid black; */
+	/* } */
 
 	.ant-layout-content {
 		min-width: 70vw !important;

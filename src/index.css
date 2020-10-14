@@ -35,7 +35,9 @@
 [data-theme="dark"] .ant-layout-content {
 	background: #107bcb;
 }
-
+html {
+	overflow: hidden;
+}
 @media (min-width: 320px) and (max-width: 1025px) {
 	.ant-layout-sider {
 		display: none !important;

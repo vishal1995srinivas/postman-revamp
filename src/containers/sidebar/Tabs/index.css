@@ -1,3 +1,6 @@
 .tabs {
 	color: #ffffff !important;
 }
+.tabPane {
+	height: 70vh;
+}

@@ -9,7 +9,9 @@ class TabsComponent extends Component {
 				menuItem: 'History',
 				render: () => (
 					<Tab.Pane inverted attached={false}>
-						History
+						<div className="tabPane">
+							History<br />
+						</div>
 					</Tab.Pane>
 				)
 			},
@@ -17,7 +19,7 @@ class TabsComponent extends Component {
 				menuItem: 'Collections',
 				render: () => (
 					<Tab.Pane inverted attached={false}>
-						Collections
+						<div className="tabPane">Collections</div>
 					</Tab.Pane>
 				)
 			}
