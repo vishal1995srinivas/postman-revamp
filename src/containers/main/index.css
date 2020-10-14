@@ -52,12 +52,6 @@
 	.sidebarOpen {
 		min-width: 50vw;
 	}
-	/* .sidebarOpen { */
-	/* min-width: 50vw; */
-	/* min-height: 70vh; */
-	/* background-color: #16213e; */
-	/* border: 2px solid black; */
-	/* } */
 
 	.ant-layout-content {
 		min-width: 70vw !important;

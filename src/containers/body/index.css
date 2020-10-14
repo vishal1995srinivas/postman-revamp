@@ -4,6 +4,8 @@
 .content {
 	min-height: 44vh;
 	border: 2px solid black;
+	background: #1b1c1d;
+	overflow: scroll;
 }
 @media (min-width: 320px) and (max-width: 1025px) {
 	.openSidebar {

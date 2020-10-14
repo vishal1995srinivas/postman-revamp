@@ -4,6 +4,18 @@ import './index.css';
 
 class TabsComponent extends Component {
 	render() {
+		// history component props
+		const { handleHistoryClick, historyLoading, requestsHistory } = this.props;
+		//collection component props
+		const {
+			handlePlayCollection,
+			collections,
+			collectionName,
+			handleDeleteCollection,
+			handleCollectionName,
+			handleCreateCollection
+		} = this.props;
+
 		const panes = [
 			{
 				menuItem: 'History',

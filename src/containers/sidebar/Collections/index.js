@@ -5,18 +5,14 @@ import SegmentComponent from './segmentComponent';
 import Collections from './collections';
 
 class CollectionsComponent extends Component {
-	constructor(props) {
-		super(props);
-		// const alert = this.props.alert;
-		this.state = {
-			activeIndex: 0
-		};
-	}
+	state = {
+		activeIndex: 0
+	};
+
 	handleClick = (e, titleProps) => {
 		const { index } = titleProps;
 		const { activeIndex } = this.state;
 		const newIndex = activeIndex === index ? -1 : index;
-
 		this.setState({ activeIndex: newIndex });
 	};
 	handlePlay = (event, index) => {
@@ -66,7 +62,6 @@ class CollectionsComponent extends Component {
 						return <LabelComponent index={index} color={color} method={requests.method} title={title} />;
 					});
 					return (
-						////  separate component
 						<SegmentComponent
 							index={index}
 							handleClick={this.handleClick}
@@ -81,7 +76,6 @@ class CollectionsComponent extends Component {
 			});
 		}
 		return (
-			//  separate component
 			<Collections
 				handleCreateCollection={this.handleCreateCollection}
 				handleCollectionName={this.handleCollectionName}

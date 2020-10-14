@@ -1,4 +1,6 @@
 .response {
 	min-height: 41vh;
 	border: 2px solid black;
+	background: #1b1c1d;
+	overflow: scroll;
 }
