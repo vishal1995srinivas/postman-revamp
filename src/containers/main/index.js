@@ -5,10 +5,15 @@ import Sidebar from '../sidebar';
 import Response from '../response';
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
+import Title from '../title';
 const { Content } = Layout;
 class Main extends Component {
 	state = {
-		sidebar: 'sidebar'
+		sidebar: 'sidebar',
+		title: ''
+	};
+	handleTitle = (event) => {
+		this.setState({ title: event.target.value });
 	};
 	onClickSidebarIcon = () => {
 		console.log('clicked on SideBar Click');
@@ -19,8 +24,8 @@ class Main extends Component {
 
 	render() {
 		const { sidebar } = this.state;
-		const { onClickSidebarIcon } = this;
-		console.log(sidebar);
+		const { onClickSidebarIcon, state, handleTitle } = this;
+		console.log(sidebar, state);
 		return (
 			<div>
 				<Layout>
@@ -29,6 +34,7 @@ class Main extends Component {
 							<Sidebar />
 						</div>
 						<Content>
+							<Title handleTitle={handleTitle} />
 							<Body sidebar={sidebar} onClickSidebarIcon={onClickSidebarIcon} />
 							<Response />
 						</Content>

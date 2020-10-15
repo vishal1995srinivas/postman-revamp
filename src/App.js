@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import Main from './containers/main';
 import AppHeader from './components/AppHeader';
+import './App.css';
 const { Header, Footer } = Layout;
 
 function App() {

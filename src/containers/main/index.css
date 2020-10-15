@@ -4,6 +4,7 @@
 .ant-layout-header {
 	height: 10vh !important;
 	background: #1a1a2e !important;
+	border-bottom: 2px solid black;
 }
 .ant-layout-footer {
 	background: #1a1a2e !important;
@@ -35,14 +36,14 @@
 	min-height: 80vh;
 	background-color: #1b1c1d;
 	border: 2px solid black;
-	overflow: scroll;
+	/* overflow: scroll; */
 }
 .sidebarOpen {
 	min-width: 25vw;
 	/* min-height: 80%; */
 	background-color: #1b1c1d;
 	border: 2px solid black;
-	overflow: scroll;
+	/* overflow: scroll; */
 }
 
 @media (min-width: 320px) and (max-width: 1025px) {

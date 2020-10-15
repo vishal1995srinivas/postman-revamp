@@ -1,0 +1,14 @@
+.title {
+	min-height: 50px;
+	background-color: #1b1c1d;
+
+	padding-top: 12px;
+	padding-left: 1vw;
+
+	border: 2px solid black;
+}
+@media (min-width: 320px) and (max-width: 1020px) {
+	.title {
+		height: 3vh;
+	}
+}
