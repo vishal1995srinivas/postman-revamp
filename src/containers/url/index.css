@@ -1,0 +1,15 @@
+.method {
+	padding: 1vw;
+	width: 10vw;
+}
+.selectTag {
+	background-color: #404040 !important;
+	color: white !important;
+	padding-left: 1.5vw;
+	width: 2vw;
+}
+@media (min-width: 320px) and (max-width: 1025px) {
+	.method {
+		width: 25vw;
+	}
+}

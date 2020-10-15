@@ -1,6 +1,7 @@
 .openSidebar {
 	display: none;
 }
+
 .content {
 	min-height: 44vh;
 	border: 2px solid black;

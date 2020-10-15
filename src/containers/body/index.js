@@ -4,6 +4,7 @@ import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 
 import './index.css';
+import Url from '../url';
 export class Body extends Component {
 	state = {};
 
@@ -13,7 +14,7 @@ export class Body extends Component {
 	};
 	render() {
 		const { onSideBarIconClick } = this;
-		const { sidebar } = this.props;
+		const { sidebar, method, handleMethod } = this.props;
 		return (
 			<div className="content">
 				<div>
@@ -24,7 +25,9 @@ export class Body extends Component {
 							onClick={onSideBarIconClick}
 						/>
 					</span>
-					<div>Body</div>
+					<div>
+						<Url method={method} handleMethod={handleMethod} />
+					</div>
 				</div>
 			</div>
 		);

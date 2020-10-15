@@ -10,7 +10,8 @@ const { Content } = Layout;
 class Main extends Component {
 	state = {
 		sidebar: 'sidebar',
-		title: ''
+		title: '',
+		method: 'GET'
 	};
 	handleTitle = (event) => {
 		this.setState({ title: event.target.value });
@@ -21,10 +22,14 @@ class Main extends Component {
 		let newDivClass = sidebar === 'sidebarOpen' ? 'sidebar' : 'sidebarOpen';
 		this.setState({ sidebar: newDivClass });
 	};
+	handleMethod = (evt, data) => {
+		// console.log(evt, data);
+		this.setState({ method: data.value });
+	};
 
 	render() {
-		const { sidebar } = this.state;
-		const { onClickSidebarIcon, state, handleTitle } = this;
+		const { sidebar, method } = this.state;
+		const { onClickSidebarIcon, state, handleTitle, handleMethod } = this;
 		console.log(sidebar, state);
 		return (
 			<div>
@@ -35,7 +40,12 @@ class Main extends Component {
 						</div>
 						<Content>
 							<Title handleTitle={handleTitle} />
-							<Body sidebar={sidebar} onClickSidebarIcon={onClickSidebarIcon} />
+							<Body
+								handleMethod={handleMethod}
+								method={method}
+								sidebar={sidebar}
+								onClickSidebarIcon={onClickSidebarIcon}
+							/>
 							<Response />
 						</Content>
 					</div>
