@@ -2,6 +2,7 @@
 	color: #ffffff !important;
 }
 .tabPane {
+	font-size: 1.25vw;
 	height: 70vh;
 	overflow-y: scroll;
 }
