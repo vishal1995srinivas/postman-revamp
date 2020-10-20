@@ -6,15 +6,24 @@ import { faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 import Url from '../url';
 export class Body extends Component {
-	state = {};
+	state = {
+		url: '',
+		method: '',
+		headers: [],
+		body: []
+	};
 
 	onSideBarIconClick = () => {
 		const { onClickSidebarIcon } = this.props;
 		onClickSidebarIcon();
 	};
+	handleSubmit = (method, url) => {
+		this.setState({ url: url, method: method });
+	};
+
 	render() {
 		const { onSideBarIconClick } = this;
-		const { sidebar, method, handleMethod } = this.props;
+		const { sidebar, method, handleMethod, handleUrlChange, url, sendLoading, handleSubmit } = this.props;
 		return (
 			<div className="content">
 				<div>
@@ -26,7 +35,14 @@ export class Body extends Component {
 						/>
 					</span>
 					<div>
-						<Url method={method} handleMethod={handleMethod} />
+						<Url
+							handleSubmit={handleSubmit}
+							sendLoading={sendLoading}
+							url={url}
+							handleUrlChange={handleUrlChange}
+							method={method}
+							handleMethod={handleMethod}
+						/>
 					</div>
 				</div>
 			</div>

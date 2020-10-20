@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
-import { Button, Select, Input, Dropdown, Segment, Icon } from 'semantic-ui-react';
+import { Button, Select, Input, Icon } from 'semantic-ui-react';
 import './index.css';
+var validUrl = require('valid-url');
 class Url extends Component {
-	state = {
-		method: 'GET',
-		url: ''
-	};
 	handleSelect = (data) => {
 		this.setState({ method: data.value });
 	};
-	handleUrlChange = (event) => {
-		this.setState({ url: event.target.value });
-	};
-	handleSubmit = () => {
-		const { url } = this.state;
-		console.log('Submitting url', url);
+
+	handleSend = () => {
+		const { handleSubmit } = this.props;
+		console.log('submitting the send');
+		handleSubmit();
 	};
 	render() {
-		const { method, url } = this.state;
-		const { handleSelect, handleUrlChange, handleSubmit } = this;
+		const { handleSend } = this;
+		const { handleUrlChange, url, handleMethod, method, sendLoading } = this.props;
 		const options = [
 			{
 				key: 'get',
@@ -46,42 +42,69 @@ class Url extends Component {
 			}
 		];
 		return (
-			<div className="urlComponent">
-				<div className="method">
-					<Select fluid value={method} options={options} className="selectTag" onChange={handleSelect} />
-				</div>
-				<form
-					onSubmit={(e) => {
-						e.preventDefault();
-						handleSubmit();
-					}}
-				>
-					<div className="url">
-						<Input
-							fluid
-							transparent
-							icon="globe"
-							iconPosition="left"
-							placeholder="Please enter your API's URL here"
-							className="inputUrl"
-							value={url}
-							onChange={handleUrlChange}
-						/>
+			<div>
+				<div className="urlComponent">
+					<div className="method">
+						<Select fluid value={method} options={options} className="selectTag" onChange={handleMethod} />
 					</div>
-				</form>
-				<Button
-					primary
-					loading={this.props.sendLoading}
-					icon
-					labelPosition="right"
-					className="submitBtn"
-					size="medium"
-					onClick={this.SubmitHandler}
-					disabled={!validUrl.isUri(this.props.url)}
-				>
-					Send
-					<Icon name="send" />
-				</Button>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							handleSend();
+						}}
+					>
+						<div className="url">
+							<Input
+								fluid
+								transparent
+								icon="globe"
+								iconPosition="left"
+								placeholder="Please enter your API's URL here"
+								className="inputUrl"
+								value={url}
+								onChange={handleUrlChange}
+							/>
+						</div>
+					</form>
+					<div className="collectionSelect">
+						<Select fluid value={method} options={options} className="selectTag" onChange={handleMethod} />
+					</div>
+					<div className="send">
+						<Button
+							color="blue"
+							fluid
+							loading={sendLoading}
+							icon
+							labelPosition="right"
+							className="submitBtn"
+							size="large"
+							onClick={this.handleSend}
+							disabled={!validUrl.isUri(url)}
+						>
+							Send
+							<Icon name="send" />
+						</Button>
+					</div>
+					<div />
+				</div>
+				<div>
+					<div className="sendMobile">
+						<Button
+							color="blue"
+							fluid
+							loading={sendLoading}
+							icon
+							labelPosition="right"
+							className="submitBtn"
+							size="medium"
+							onClick={this.handleSend}
+							disabled={!validUrl.isUri(url)}
+						>
+							Send
+							<Icon name="send" />
+						</Button>
+					</div>
+				</div>
 			</div>
 		);
 	}
