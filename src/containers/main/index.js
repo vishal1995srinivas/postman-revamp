@@ -13,7 +13,41 @@ class Main extends Component {
 		title: '',
 		method: 'GET',
 		url: '',
-		sendLoading: false
+		sendLoading: false,
+		headerData: [ { key: '', value: '' } ]
+	};
+	handleHeaderDataKeyChange = (event, index) => {
+		const { headerData } = this.state;
+		let newHeaderData = [ ...headerData ];
+		console.log(newHeaderData, headerData);
+		newHeaderData[index].key = event.target.value;
+		console.log(newHeaderData);
+		this.removeExtraEntry(newHeaderData, 'header');
+	};
+	removeExtraEntry = (data, tab) => {
+		console.log(data);
+		let newData = data.filter((entry) => {
+			if (entry.key !== '') {
+				return entry;
+			}
+		});
+		console.log(newData);
+		this.addNewEntry(newData, tab);
+	};
+	addNewEntry = (newData, tab) => {
+		console.log(newData);
+		let newEntry = { key: '', value: '' };
+		newData.push(newEntry);
+		if (tab === 'header') {
+			this.setState({ headerData: newData });
+		} else if (tab === 'body') {
+		}
+	};
+	handleHeaderDataValueChange = (event, index) => {
+		const { headerData } = this.state;
+		let newHeaderData = [ ...headerData ];
+		newHeaderData[index].value = event.target.value;
+		this.setState({ headerData: newHeaderData });
 	};
 	handleTitle = (event) => {
 		this.setState({ title: event.target.value });
@@ -38,9 +72,18 @@ class Main extends Component {
 		this.setState({ sendLoading: true });
 	};
 	render() {
-		const { sidebar, method, url, sendLoading } = this.state;
-		const { onClickSidebarIcon, state, handleTitle, handleMethod, handleUrlChange, handleSubmit } = this;
-		console.log(sidebar, state);
+		const { sidebar, method, url, sendLoading, headerData } = this.state;
+		const {
+			onClickSidebarIcon,
+			state,
+			handleHeaderDataValueChange,
+			handleHeaderDataKeyChange,
+			handleTitle,
+			handleMethod,
+			handleUrlChange,
+			handleSubmit
+		} = this;
+		console.log(sidebar, state, headerData);
 		return (
 			<div>
 				<Layout>
@@ -59,6 +102,9 @@ class Main extends Component {
 								onClickSidebarIcon={onClickSidebarIcon}
 								handleUrlChange={handleUrlChange}
 								url={url}
+								headerData={headerData}
+								handleHeaderDataKeyChange={handleHeaderDataKeyChange}
+								handleHeaderDataValueChange={handleHeaderDataValueChange}
 							/>
 							<Response />
 						</Content>
