@@ -34,7 +34,10 @@ export class Body extends Component {
 			handleUrlChange,
 			url,
 			sendLoading,
-			handleSubmit
+			handleSubmit,
+			bodyValue,
+			bodyData,
+			handleBodyValueChange
 		} = this.props;
 
 		return (
@@ -59,6 +62,9 @@ export class Body extends Component {
 					</div>
 					<div>
 						<OptionsTab
+							handleBodyValueChange={handleBodyValueChange}
+							bodyData={bodyData}
+							bodyValue={bodyValue}
 							headerData={headerData}
 							handleHeaderDataKeyChange={handleHeaderDataKeyChange}
 							handleHeaderDataValueChange={handleHeaderDataValueChange}

@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import { Tab } from 'semantic-ui-react';
 import './index.css';
 import EntryTable from '../entryTable';
+import RadioGroup from './bodyOptions';
 
 class OptionsTab extends Component {
 	render() {
-		const { headerData, handleHeaderDataKeyChange, handleHeaderDataValueChange } = this.props;
+		const {
+			headerData,
+			handleHeaderDataKeyChange,
+			handleHeaderDataValueChange,
+			bodyValue,
+			bodyData,
+			handleBodyValueChange
+		} = this.props;
 		let headerKeyPlaceholder = 'Content-Type';
 		let headerValuePlaceholder = 'application/json';
 		const panes = [
@@ -30,7 +38,13 @@ class OptionsTab extends Component {
 				menuItem: 'Body',
 				render: () => (
 					<Tab.Pane inverted attached={false}>
-						<div className="bodyTab">Body</div>
+						<div className="bodyTab">
+							<RadioGroup
+								bodyData={bodyData}
+								bodyValue={bodyValue}
+								handleBodyValueChange={handleBodyValueChange}
+							/>
+						</div>
 					</Tab.Pane>
 				)
 			},

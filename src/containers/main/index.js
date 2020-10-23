@@ -13,8 +13,12 @@ class Main extends Component {
 		title: '',
 		method: 'GET',
 		url: '',
+		//send button
 		sendLoading: false,
-		headerData: [ { key: '', value: '' } ]
+		headerData: [ { key: '', value: '' } ],
+		bodyData: [ { key: '', value: '' } ],
+		// none, form-data, url-encoded
+		bodyValue: ''
 	};
 	handleHeaderDataKeyChange = (event, index) => {
 		const { headerData } = this.state;
@@ -24,6 +28,7 @@ class Main extends Component {
 		console.log(newHeaderData);
 		this.removeExtraEntry(newHeaderData, 'header');
 	};
+
 	removeExtraEntry = (data, tab) => {
 		console.log(data);
 		let newData = data.filter((entry) => {
@@ -71,8 +76,9 @@ class Main extends Component {
 
 		this.setState({ sendLoading: true });
 	};
+	handleBodyValueChange = (e, { value }) => this.setState({ bodyValue: value });
 	render() {
-		const { sidebar, method, url, sendLoading, headerData } = this.state;
+		const { sidebar, bodyValue, bodyData, method, url, sendLoading, headerData } = this.state;
 		const {
 			onClickSidebarIcon,
 			state,
@@ -81,7 +87,8 @@ class Main extends Component {
 			handleTitle,
 			handleMethod,
 			handleUrlChange,
-			handleSubmit
+			handleSubmit,
+			handleBodyValueChange
 		} = this;
 		console.log(sidebar, state, headerData);
 		return (
@@ -105,6 +112,9 @@ class Main extends Component {
 								headerData={headerData}
 								handleHeaderDataKeyChange={handleHeaderDataKeyChange}
 								handleHeaderDataValueChange={handleHeaderDataValueChange}
+								bodyValue={bodyValue}
+								bodyData={bodyData}
+								handleBodyValueChange={handleBodyValueChange}
 							/>
 							<Response />
 						</Content>

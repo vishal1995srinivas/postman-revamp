@@ -1,0 +1,12 @@
+.bodyForm {
+	display: flex;
+}
+.radioButton {
+	/* padding-right: 10px; */
+	color: white !important;
+}
+@media (min-width: 320px) and (max-width: 1025px) {
+	.bodyForm {
+		display: inline;
+	}
+}
