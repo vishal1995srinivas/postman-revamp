@@ -18,7 +18,22 @@ class Main extends Component {
 		headerData: [ { key: '', value: '' } ],
 		bodyData: [ { key: '', value: '' } ],
 		// none, form-data, url-encoded
-		bodyValue: ''
+		bodyValue: 'none'
+	};
+	handleBodyDataKeyChange = (event, index) => {
+		console.log('object');
+		const { bodyData } = this.state;
+		let newBodyData = [ ...bodyData ];
+		console.log(newBodyData, bodyData);
+		newBodyData[index].key = event.target.value;
+		console.log(newBodyData);
+		this.removeExtraEntry(newBodyData, 'body');
+	};
+	handleBodyDataValueChange = (event, index) => {
+		const { bodyData } = this.state;
+		let newBodyData = [ ...bodyData ];
+		newBodyData[index].value = event.target.value;
+		this.setState({ bodyData: newBodyData });
 	};
 	handleHeaderDataKeyChange = (event, index) => {
 		const { headerData } = this.state;
@@ -46,6 +61,7 @@ class Main extends Component {
 		if (tab === 'header') {
 			this.setState({ headerData: newData });
 		} else if (tab === 'body') {
+			this.setState({ bodyData: newData });
 		}
 	};
 	handleHeaderDataValueChange = (event, index) => {
@@ -88,7 +104,9 @@ class Main extends Component {
 			handleMethod,
 			handleUrlChange,
 			handleSubmit,
-			handleBodyValueChange
+			handleBodyValueChange,
+			handleBodyDataValueChange,
+			handleBodyDataKeyChange
 		} = this;
 		console.log(sidebar, state, headerData);
 		return (
@@ -101,6 +119,8 @@ class Main extends Component {
 						<Content>
 							<Title handleTitle={handleTitle} />
 							<Body
+								handleBodyDataKeyChange={handleBodyDataKeyChange}
+								handleBodyDataValueChange={handleBodyDataValueChange}
 								handleSubmit={handleSubmit}
 								sendLoading={sendLoading}
 								handleMethod={handleMethod}

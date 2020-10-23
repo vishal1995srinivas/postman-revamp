@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { Input, Table } from 'semantic-ui-react';
-export class EntryTable extends Component {
-	state = {
-		data: [ {} ]
-	};
-
+class EntryTable extends Component {
 	render() {
-		const { handleKeyChange, data, handleValueChange, headerKeyPlaceholder, headerValuePlaceholder } = this.props;
+		const { handleKeyChange, data, handleValueChange, keyPlaceholder, valuePlaceholder } = this.props;
 		console.log(data);
 
 		return (
@@ -27,7 +23,7 @@ export class EntryTable extends Component {
 											fluid
 											transparent
 											inverted
-											placeholder={headerKeyPlaceholder}
+											placeholder={keyPlaceholder}
 											value={keyValuePair.key}
 											onChange={(event) => handleKeyChange(event, index)}
 										/>
@@ -37,7 +33,7 @@ export class EntryTable extends Component {
 											fluid
 											transparent
 											inverted
-											placeholder={headerValuePlaceholder}
+											placeholder={valuePlaceholder}
 											value={keyValuePair.value}
 											onChange={(event) => handleValueChange(event, index)}
 										/>

@@ -12,11 +12,16 @@ class OptionsTab extends Component {
 			handleHeaderDataValueChange,
 			bodyValue,
 			bodyData,
-			handleBodyValueChange
+			handleBodyValueChange,
+			handleBodyDataKeyChange,
+			handleBodyDataValueChange,
+			method
 		} = this.props;
 		let headerKeyPlaceholder = 'Content-Type';
 		let headerValuePlaceholder = 'application/json';
-		const panes = [
+		let bodyKeyPlaceholder = 'userId';
+		let bodyValuePlaceholder = '3';
+		let panes = [
 			{
 				menuItem: 'Headers',
 				render: () => (
@@ -24,8 +29,8 @@ class OptionsTab extends Component {
 						<div className="bodyTab">
 							* Content-Type : application / json is automatically added. No need of explicit declaration.
 							<EntryTable
-								headerKeyPlaceholder={headerKeyPlaceholder}
-								headerValuePlaceholder={headerValuePlaceholder}
+								keyPlaceholder={headerKeyPlaceholder}
+								valuePlaceholder={headerValuePlaceholder}
 								data={headerData}
 								handleKeyChange={handleHeaderDataKeyChange}
 								handleValueChange={handleHeaderDataValueChange}
@@ -44,6 +49,23 @@ class OptionsTab extends Component {
 								bodyValue={bodyValue}
 								handleBodyValueChange={handleBodyValueChange}
 							/>
+							{bodyValue === 'data' ? (
+								<div className="bodyTab">
+									<EntryTable
+										keyPlaceholder={bodyKeyPlaceholder}
+										valuePlaceholder={bodyValuePlaceholder}
+										data={bodyData}
+										handleKeyChange={handleBodyDataKeyChange}
+										handleValueChange={handleBodyDataValueChange}
+									/>
+								</div>
+							) : bodyValue === 'url-encoded' ? (
+								<div>url Encoded</div>
+							) : bodyValue === 'raw' ? (
+								<div>raw</div>
+							) : (
+								<div>none</div>
+							)}
 						</div>
 					</Tab.Pane>
 				)
@@ -57,6 +79,9 @@ class OptionsTab extends Component {
 				)
 			}
 		];
+		if (method === 'GET') {
+			panes.splice(1, 1);
+		}
 		return <Tab menu={{ inverted: true, pointing: true }} panes={panes} />;
 	}
 }
