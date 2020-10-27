@@ -29,7 +29,10 @@ class Body extends Component {
 			bodyData,
 			handleBodyValueChange,
 			handleBodyDataKeyChange,
-			handleBodyDataValueChange
+			handleBodyDataValueChange,
+			objUpdate,
+			clearTests,
+			testObj
 		} = this.props;
 
 		return (
@@ -60,6 +63,9 @@ class Body extends Component {
 							bodyData={bodyData}
 							bodyValue={bodyValue}
 							method={method}
+							testObj={testObj}
+							objUpdate={objUpdate}
+							clearTests={clearTests}
 							headerData={headerData}
 							handleHeaderDataKeyChange={handleHeaderDataKeyChange}
 							handleHeaderDataValueChange={handleHeaderDataValueChange}

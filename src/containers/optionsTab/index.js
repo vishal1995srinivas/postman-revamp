@@ -3,7 +3,7 @@ import { Tab } from 'semantic-ui-react';
 import './index.css';
 import EntryTable from '../entryTable';
 import RadioGroup from './bodyOptions';
-
+import Tests from './test';
 class OptionsTab extends Component {
 	render() {
 		const {
@@ -15,7 +15,10 @@ class OptionsTab extends Component {
 			handleBodyValueChange,
 			handleBodyDataKeyChange,
 			handleBodyDataValueChange,
-			method
+			method,
+			objUpdate,
+			clearTests,
+			testObj
 		} = this.props;
 		let headerKeyPlaceholder = 'Content-Type';
 		let headerValuePlaceholder = 'application/json';
@@ -60,9 +63,17 @@ class OptionsTab extends Component {
 									/>
 								</div>
 							) : bodyValue === 'url-encoded' ? (
-								<div>url Encoded</div>
+								<div className="bodyTab">
+									<EntryTable
+										keyPlaceholder={bodyKeyPlaceholder}
+										valuePlaceholder={bodyValuePlaceholder}
+										data={bodyData}
+										handleKeyChange={handleBodyDataKeyChange}
+										handleValueChange={handleBodyDataValueChange}
+									/>
+								</div>
 							) : bodyValue === 'raw' ? (
-								<div>raw</div>
+								<div>This feature is under construction</div>
 							) : (
 								<div>none</div>
 							)}
@@ -74,7 +85,11 @@ class OptionsTab extends Component {
 				menuItem: 'Test Case',
 				render: () => (
 					<Tab.Pane inverted attached={false}>
-						<div className="bodyTab">Test Case</div>
+						<div className="bodyTab">
+							<div className="bodyTab">
+								<Tests objUpdate={objUpdate} clearTests={clearTests} testObj={testObj} />
+							</div>
+						</div>
 					</Tab.Pane>
 				)
 			}

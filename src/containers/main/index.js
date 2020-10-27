@@ -18,7 +18,14 @@ class Main extends Component {
 		headerData: [ { key: '', value: '' } ],
 		bodyData: [ { key: '', value: '' } ],
 		// none, form-data, url-encoded
-		bodyValue: 'none'
+		bodyValue: 'none',
+		testObj: null
+	};
+	objUpdate = (arg) => {
+		this.setState({ testObj: arg });
+	};
+	clearTests = () => {
+		this.setState({ testObj: null });
 	};
 	handleBodyDataKeyChange = (event, index) => {
 		console.log('object');
@@ -94,7 +101,7 @@ class Main extends Component {
 	};
 	handleBodyValueChange = (e, { value }) => this.setState({ bodyValue: value });
 	render() {
-		const { sidebar, bodyValue, bodyData, method, url, sendLoading, headerData } = this.state;
+		const { sidebar, bodyValue, bodyData, method, testObj, url, sendLoading, headerData } = this.state;
 		const {
 			onClickSidebarIcon,
 			state,
@@ -106,7 +113,9 @@ class Main extends Component {
 			handleSubmit,
 			handleBodyValueChange,
 			handleBodyDataValueChange,
-			handleBodyDataKeyChange
+			handleBodyDataKeyChange,
+			objUpdate,
+			clearTests
 		} = this;
 		console.log(sidebar, state, headerData);
 		return (
@@ -119,6 +128,9 @@ class Main extends Component {
 						<Content>
 							<Title handleTitle={handleTitle} />
 							<Body
+								testObj={testObj}
+								objUpdate={objUpdate}
+								clearTests={clearTests}
 								handleBodyDataKeyChange={handleBodyDataKeyChange}
 								handleBodyDataValueChange={handleBodyDataValueChange}
 								handleSubmit={handleSubmit}
