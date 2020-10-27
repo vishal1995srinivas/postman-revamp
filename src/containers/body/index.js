@@ -32,7 +32,10 @@ class Body extends Component {
 			handleBodyDataValueChange,
 			objUpdate,
 			clearTests,
-			testObj
+			testObj,
+			collections,
+			handleSaveToCollectionName,
+			collectionName
 		} = this.props;
 
 		return (
@@ -47,6 +50,9 @@ class Body extends Component {
 					</span>
 					<div>
 						<Url
+							collectionName={collectionName}
+							handleSaveToCollectionName={handleSaveToCollectionName}
+							collections={collections}
 							handleSubmit={handleSubmit}
 							sendLoading={sendLoading}
 							url={url}

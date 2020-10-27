@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
-import { Button, Select, Input, Icon } from 'semantic-ui-react';
+import { Button, Select, Input, Icon, Dropdown } from 'semantic-ui-react';
 import './index.css';
 var validUrl = require('valid-url');
 class Url extends Component {
 	handleSelect = (data) => {
 		this.setState({ method: data.value });
 	};
-
+	handleCollectionSelect = (event, data) => {
+		this.props.handleSaveToCollectionName(data.value);
+	};
 	handleSend = () => {
 		const { handleSubmit } = this.props;
 		console.log('submitting the send');
 		handleSubmit();
 	};
 	render() {
-		const { handleSend } = this;
-		const { handleUrlChange, url, handleMethod, method, sendLoading } = this.props;
+		const { handleSend, handleCollectionSelect } = this;
+		const { handleUrlChange, url, handleMethod, method, collectionName, sendLoading } = this.props;
+		const collections = this.props.collections.map((collection, index) => {
+			return {
+				key: collection._id,
+				style: { backgroundColor: '#404040', color: 'white' },
+				text: collection.collectionName,
+				value: collection.collectionName
+			};
+		});
 		const options = [
 			{
 				key: 'get',
@@ -41,6 +51,7 @@ class Url extends Component {
 				style: { backgroundColor: '#404040', color: 'white' }
 			}
 		];
+
 		return (
 			<div>
 				<div className="urlComponent">
@@ -67,7 +78,20 @@ class Url extends Component {
 						</div>
 					</form>
 					<div className="collectionSelect">
-						<Select fluid value={method} options={options} className="selectTag" onChange={handleMethod} />
+						<Dropdown
+							disabled={sendLoading || !validUrl.isUri(url)}
+							search
+							scrolling
+							closeOnEscape
+							clearable
+							options={collections}
+							selection
+							onChange={handleCollectionSelect}
+							value={collectionName}
+							fluid
+							className="selectTag"
+							placeholder="Add"
+						/>
 					</div>
 					<div className="send">
 						<Button
@@ -75,7 +99,7 @@ class Url extends Component {
 							fluid
 							loading={sendLoading}
 							icon
-							labelPosition="right"
+							labelPosition="left"
 							className="submitBtn"
 							size="large"
 							onClick={this.handleSend}
