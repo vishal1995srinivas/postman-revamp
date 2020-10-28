@@ -87,61 +87,63 @@ class SignIn extends Component {
 	render() {
 		//console.log(this.state);
 		return (
-			<div>
-				<div className="registerForm">
-					<div className="Loader">&#8734;</div>
-					<h2>Login</h2>
+			<div className="form">
+				<div className="centerForm">
+					<div className="registerForm">
+						<div className="Loader">&#8734;</div>
+						<h2>Login</h2>
 
-					<div className="input">
-						<div className="inputBox">
-							<label>Email</label>
-							<input
-								type="text"
-								value={this.state.email}
-								onChange={this.handleUserInput}
-								name="email"
-								placeholder="sundar@gmail.com"
-								required
-								autoComplete="off"
-							/>
-						</div>
-						<div className="inputBox">
-							<label>Password</label>
-							<input
-								type="password"
-								value={this.state.password}
-								onChange={this.handleUserInput}
-								name="password"
-								placeholder="123456789"
-								required
-							/>
-						</div>
-						<div className="error">{this.state.error}</div>
-						{this.state.formValid ? (
-							<div>
-								{this.state.isLoading ? (
-									<div className="inputBox">
-										<i class="fa fa-refresh fa-spin" />
-										<input type="submit" value="Signing In...." disabled />
-									</div>
-								) : (
-									<div className="inputBox">
-										<input
-											type="submit"
-											onClick={this.onSubmit}
-											value="Sign In"
-											disabled={!this.state.formValid}
-										/>
-									</div>
-								)}
+						<div className="input">
+							<div className="inputBox">
+								<label>Email</label>
+								<input
+									type="text"
+									value={this.state.email}
+									onChange={this.handleUserInput}
+									name="email"
+									placeholder="sundar@gmail.com"
+									required
+									autoComplete="off"
+								/>
 							</div>
-						) : (
-							<div />
-						)}
+							<div className="inputBox">
+								<label>Password</label>
+								<input
+									type="password"
+									value={this.state.password}
+									onChange={this.handleUserInput}
+									name="password"
+									placeholder="123456789"
+									required
+								/>
+							</div>
+							<div className="error">{this.state.error}</div>
+							{this.state.formValid ? (
+								<div>
+									{this.state.isLoading ? (
+										<div className="inputBox">
+											<i class="fa fa-refresh fa-spin" />
+											<input type="submit" value="Signing In...." disabled />
+										</div>
+									) : (
+										<div className="inputBox">
+											<input
+												type="submit"
+												onClick={this.onSubmit}
+												value="Sign In"
+												disabled={!this.state.formValid}
+											/>
+										</div>
+									)}
+								</div>
+							) : (
+								<div />
+							)}
+						</div>
+						<p className="forget">
+							Not a member yet ? <a href="/register">Register !</a>
+						</p>
 					</div>
-					<p className="forget">
-						Not a member yet ? <a href="/register">Register !</a>
-					</p>
 				</div>
 			</div>
 		);

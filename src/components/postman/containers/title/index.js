@@ -15,12 +15,26 @@ function Title(props) {
 	const menu = (
 		<Menu>
 			<Menu.Item className="dropDownHeader">
-				<a target="_blank" className="dropdown" rel="noopener noreferrer" href="http://www.alipay.com/">
+				<a
+					target="_blank"
+					onClick={(e) => {
+						e.preventDefault();
+						localStorage.removeItem('user-Details');
+						props.history.push('/login');
+					}}
+					className="dropdown"
+					rel="noopener noreferrer"
+					href="/login"
+				>
 					Log out
 				</a>
 			</Menu.Item>
 		</Menu>
 	);
+	const logOutHandler = () => {
+		localStorage.removeItem('user-Details');
+		this.props.history.push('/login');
+	};
 	return (
 		<div className="title">
 			<Input
@@ -36,7 +50,15 @@ function Title(props) {
 			/>
 			<div className="loginLetter">
 				<Dropdown overlay={menu}>
-					<a href="#index" className="dropdown" onClick={(e) => e.preventDefault()}>
+					<a
+						href="#index"
+						className="dropdown"
+						onClick={(e) => {
+							e.preventDefault();
+							localStorage.removeItem('user-Details');
+							this.props.history.push('/login');
+						}}
+					>
 						{letter} <DownOutlined />
 					</a>
 				</Dropdown>

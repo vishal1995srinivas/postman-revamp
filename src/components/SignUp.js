@@ -96,76 +96,78 @@ class SignUp extends Component {
 	render() {
 		//console.log(this.state.formErrors);
 		return (
-			<div>
-				<div className="registerForm">
-					<div className="Loader">&#8734;</div>
-					<h2>Register</h2>
+			<div className="form">
+				<div>
+					<div className="registerForm">
+						<div className="Loader">&#8734;</div>
+						<h2>Register</h2>
 
-					<div className="input">
-						<div className="inputBox">
-							<label>Name</label>
-							<input
-								type="text"
-								name="name"
-								value={this.state.name}
-								onChange={this.handleUserInput}
-								required
-								placeholder="Your Name"
-								autoComplete="off"
-							/>
-						</div>
-						<div className={`inputBox ${this.errorClass(this.state.formErrors.email)}`}>
-							<label>Email</label>
-							<input
-								type="text"
-								value={this.state.email}
-								onChange={this.handleUserInput}
-								name="email"
-								placeholder="abc@xyz.com"
-								required
-								autoComplete="off"
-							/>
-						</div>
-						<div className={`inputBox ${this.errorClass(this.state.formErrors.password)}`}>
-							<label>Password</label>
-							<input
-								type="password"
-								value={this.state.password}
-								onChange={this.handleUserInput}
-								name="password"
-								placeholder="*********"
-								required
-							/>
-						</div>
-						<div className="error">{this.state.error}</div>
-						<div className="panel panel-default">
-							<FormErrors formErrors={this.state.formErrors} />
-						</div>
-						{this.state.formValid ? (
-							<div>
-								{this.state.isLoading ? (
-									<div className="inputBox">
-										<i class="fa fa-refresh fa-spin" />
-										<input type="submit" value="Signing Up...." disabled />
-									</div>
-								) : (
-									<div className="inputBox">
-										<input
-											type="submit"
-											onClick={this.handleSubmit}
-											value="Sign Up"
-											disabled={!this.state.formValid}
-										/>
-									</div>
-								)}
+						<div className="input">
+							<div className="inputBox">
+								<label>Name</label>
+								<input
+									type="text"
+									name="name"
+									value={this.state.name}
+									onChange={this.handleUserInput}
+									required
+									placeholder="Your Name"
+									autoComplete="off"
+								/>
 							</div>
-						) : (
-							<div />
-						)}
+							<div className={`inputBox ${this.errorClass(this.state.formErrors.email)}`}>
+								<label>Email</label>
+								<input
+									type="text"
+									value={this.state.email}
+									onChange={this.handleUserInput}
+									name="email"
+									placeholder="abc@xyz.com"
+									required
+									autoComplete="off"
+								/>
+							</div>
+							<div className={`inputBox ${this.errorClass(this.state.formErrors.password)}`}>
+								<label>Password</label>
+								<input
+									type="password"
+									value={this.state.password}
+									onChange={this.handleUserInput}
+									name="password"
+									placeholder="*********"
+									required
+								/>
+							</div>
+							<div className="error">{this.state.error}</div>
+							<div className="panel panel-default">
+								<FormErrors formErrors={this.state.formErrors} />
+							</div>
+							{this.state.formValid ? (
+								<div>
+									{this.state.isLoading ? (
+										<div className="inputBox">
+											<i class="fa fa-refresh fa-spin" />
+											<input type="submit" value="Signing Up...." disabled />
+										</div>
+									) : (
+										<div className="inputBox">
+											<input
+												type="submit"
+												onClick={this.handleSubmit}
+												value="Sign Up"
+												disabled={!this.state.formValid}
+											/>
+										</div>
+									)}
+								</div>
+							) : (
+								<div />
+							)}
+						</div>
+						<p className="forget">
+							Already Registered ? <a href="/login">Login !</a>
+						</p>
 					</div>
-					<p className="forget">
-						Already Registered ? <a href="/login">Login !</a>
-					</p>
 				</div>
 			</div>
 		);

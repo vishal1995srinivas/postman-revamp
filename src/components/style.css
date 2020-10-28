@@ -8,6 +8,14 @@
 body {
 	background: #131419;
 }
+.form {
+	display: flex;
+	top: 50%;
+	justify-content: center;
+	align-items: center;
+	padding-top: 10%;
+}
+
 .registerForm {
 	position: relative;
 	width: 350px;
@@ -139,5 +147,10 @@ body {
 	to {
 		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff, 0 0 35px #228dff, 0 0 40px #228dff,
 			0 0 50px #228dff, 0 0 75px #228dff;
+	}
+}
+@media (min-width: 320px) and (max-width: 1020px) {
+	.form {
+		padding-top: 30%;
 	}
 }
