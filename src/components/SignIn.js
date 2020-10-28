@@ -3,19 +3,16 @@ import './style.css';
 import axios from 'axios';
 
 class SignIn extends Component {
-	constructor(props) {
-		super(props);
+	state = {
+		email: '',
+		password: '',
+		error: '',
+		formErrors: { email: '' },
+		emailValid: false,
+		formValid: false,
+		isLoading: false
+	};
 
-		this.state = {
-			email: '',
-			password: '',
-			error: '',
-			formErrors: { email: '' },
-			emailValid: false,
-			formValid: false,
-			isLoading: false
-		};
-	}
 	onChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -28,7 +25,7 @@ class SignIn extends Component {
 			this.validateField(name, value);
 		});
 	};
-	validateField(fieldName, value) {
+	validateField = (fieldName, value) => {
 		let fieldValidationErrors = this.state.formErrors;
 		let emailValid = this.state.emailValid;
 		switch (fieldName) {
@@ -46,13 +43,13 @@ class SignIn extends Component {
 			},
 			this.validateForm
 		);
-	}
-	validateForm() {
+	};
+	validateForm = () => {
 		this.setState({ formValid: this.state.emailValid });
-	}
-	errorClass(error) {
+	};
+	errorClass = (error) => {
 		return error.length === 0 ? '' : 'has-error';
-	}
+	};
 	onSubmit = (e) => {
 		e.preventDefault();
 		this.setState({
@@ -141,10 +138,6 @@ class SignIn extends Component {
 						) : (
 							<div />
 						)}
-
-						{/* <div className="inputBox">
-							<input type="submit" name="" value="Sign In" onClick={this.onSubmit} />
-						</div> */}
 					</div>
 					<p className="forget">
 						Not a member yet ? <a href="/register">Register !</a>
