@@ -23,7 +23,8 @@ class Main extends Component {
 		testObj: null,
 		collections: [],
 		requestsHistory: [],
-		collectionName: ''
+		collectionName: '',
+		historyLoading: true
 	};
 	// async componentDidMount() {
 	// 	const jwt = getJwt();
@@ -130,7 +131,9 @@ class Main extends Component {
 			testObj,
 			url,
 			sendLoading,
-			headerData
+			headerData,
+			historyLoading,
+			requestsHistory
 		} = this.state;
 		const {
 			onClickSidebarIcon,
@@ -154,7 +157,7 @@ class Main extends Component {
 				<Layout>
 					<div className="main">
 						<div className={sidebar}>
-							<Sidebar />
+							<Sidebar historyLoading={historyLoading} requestsHistory={requestsHistory} />
 						</div>
 						<Content>
 							<Title handleTitle={handleTitle} />

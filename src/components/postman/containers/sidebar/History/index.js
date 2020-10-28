@@ -68,7 +68,7 @@ class HistoryComponent extends Component {
 			return (
 				<div>
 					<div>
-						<Skeleton count={50} color="#1b1c1d" width="100%" />
+						<Skeleton count={50} color="#131414" width="100%" animated={false} />
 					</div>
 				</div>
 			);

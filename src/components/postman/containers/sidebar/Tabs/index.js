@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tab } from 'semantic-ui-react';
 import './index.css';
+import HistoryComponent from '../History';
 
 class TabsComponent extends Component {
 	render() {
@@ -22,7 +23,7 @@ class TabsComponent extends Component {
 				render: () => (
 					<Tab.Pane inverted attached={false}>
 						<div className="tabPane">
-							History<br />
+							<HistoryComponent historyLoading={historyLoading} requestsHistory={requestsHistory} />
 						</div>
 					</Tab.Pane>
 				)

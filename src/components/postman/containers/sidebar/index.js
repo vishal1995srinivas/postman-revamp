@@ -6,10 +6,10 @@ class Sidebar extends Component {
 		console.log('Clicked on close side menu');
 	};
 	render() {
-		const { sidebar } = this.props;
+		const { sidebar, historyLoading, requestsHistory } = this.props;
 		return (
 			<div className={sidebar}>
-				<TabsComponent />
+				<TabsComponent historyLoading={historyLoading} requestsHistory={requestsHistory} />
 			</div>
 		);
 	}
