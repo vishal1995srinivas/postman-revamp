@@ -7,6 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 import Title from '../title';
 import { getJwt } from '../../helpers/jwt';
+import getHistory from '../../db/getHistory';
 const { Content } = Layout;
 class Main extends Component {
 	state = {
@@ -26,18 +27,17 @@ class Main extends Component {
 		collectionName: '',
 		historyLoading: true
 	};
-	// async componentDidMount() {
-	// 	const jwt = getJwt();
-	// 	let userId = jwt.userId;
-	// 	let userToken = jwt.userToken;
-	// 	let requestHistory = await getHistory(userId, userToken);
-	// 	let topHistory = requestHistory.requests.reverse();
-
-	// 	let collections = await getCollections(userId, userToken);
-	// 	let topCollections = collections.reverse();
-	// 	this.setState({ ToSideBarHistory: topHistory, collections: topCollections, historyLoading: false });
-
-	// }
+	async componentDidMount() {
+		const jwt = getJwt();
+		let userId = jwt.userId;
+		let userToken = jwt.userToken;
+		let requestHistory = await getHistory(userId, userToken);
+		let topHistory = requestHistory.requests.reverse();
+		this.setState({ requestsHistory: topHistory, historyLoading: false });
+		// let collections = await getCollections(userId, userToken);
+		// let topCollections = collections.reverse();
+		// this.setState({ ToSideBarHistory: topHistory, collections: topCollections, historyLoading: false });
+	}
 	handleSaveToCollectionName = (value) => {
 		this.setState({ collectionName: value });
 	};

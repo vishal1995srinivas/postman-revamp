@@ -1,0 +1,9 @@
+.example {
+	color: #ffffff !important;
+
+	font-family: 'Poppins', 'arial';
+	font-size: 1vw;
+}
+.exampleMethod {
+	float: right;
+}

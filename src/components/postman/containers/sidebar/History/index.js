@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Label, List } from 'semantic-ui-react';
 import Skeleton from 'react-skeleton-loader';
-
+import './index.css';
 class HistoryComponent extends Component {
 	handleLabelSelect = (event, url, method, title, data, headers, testJson) => {
 		this.props.handleHistoryClick(url, method, title, data, headers, testJson);
