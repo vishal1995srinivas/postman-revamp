@@ -8,7 +8,7 @@
 .ant-layout-footer {
 	background: #7dbcea !important;
 	color: #fff;
-	height: 10vh !important;
+	min-height: 25vh !important;
 }
 [data-theme="dark"] .ant-layout-header {
 	background: red;

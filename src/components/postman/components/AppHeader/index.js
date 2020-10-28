@@ -2,9 +2,12 @@ import React from 'react';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import './index.css';
+import { getJwt } from '../../helpers/jwt';
 import logo from '../../images/2.png';
-// TODO : 1. add user login info and dropDown for logout
 function AppHeader() {
+	const jwt = getJwt();
+	let username = jwt.userName;
+	let letter = username.charAt(0).toUpperCase();
 	const menu = (
 		<Menu>
 			<Menu.Item className="dropDownHeader">
@@ -22,7 +25,7 @@ function AppHeader() {
 			<div>
 				<Dropdown overlay={menu}>
 					<a href="#index" className="dropdown" onClick={(e) => e.preventDefault()}>
-						Hover me <DownOutlined />
+						{letter} <DownOutlined />
 					</a>
 				</Dropdown>
 			</div>
