@@ -90,7 +90,7 @@ class Url extends Component {
 							value={collectionName}
 							fluid
 							className="selectTag"
-							placeholder="Add"
+							placeholder="Add to"
 						/>
 					</div>
 					<div className="send">
