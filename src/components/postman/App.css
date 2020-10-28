@@ -1,0 +1,11 @@
+.App {
+	color: #ffffff !important;
+	overflow: hidden;
+	font-family: 'Quicksand', 'arial';
+	font-size: 1.25vw;
+}
+@media (min-width: 320px) and (max-width: 1025px) {
+	.App {
+		font-size: 4vw;
+	}
+}
