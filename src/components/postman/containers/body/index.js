@@ -39,7 +39,7 @@ class Body extends Component {
 		} = this.props;
 
 		return (
-			<div className="content">
+			<div className="bodyContent">
 				<div>
 					<span className="slide">
 						<FontAwesomeIcon

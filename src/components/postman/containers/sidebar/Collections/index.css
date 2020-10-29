@@ -1,0 +1,18 @@
+.label {
+	padding-top: 10px;
+	color: white;
+}
+.collectionName {
+	float: left;
+}
+.iconPlay {
+	float: right;
+	/* color: black; */
+}
+.dropdown {
+	padding-right: 5px;
+}
+.title {
+	display: flex;
+	justify-content: space-between;
+}

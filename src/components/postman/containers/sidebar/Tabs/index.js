@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Tab } from 'semantic-ui-react';
 import './index.css';
 import HistoryComponent from '../History';
+import CollectionsComponent from '../Collections';
 
 class TabsComponent extends Component {
 	render() {
@@ -32,7 +33,16 @@ class TabsComponent extends Component {
 				menuItem: 'Collections',
 				render: () => (
 					<Tab.Pane inverted attached={false}>
-						<div className="tabPane">Collections</div>
+						<div className="tabPane">
+							<CollectionsComponent
+								handlePlayCollection={handlePlayCollection}
+								collections={collections}
+								collectionName={collectionName}
+								handleDeleteCollection={handleDeleteCollection}
+								handleCollectionName={handleCollectionName}
+								handleCreateCollection={handleCreateCollection}
+							/>
+						</div>
 					</Tab.Pane>
 				)
 			}

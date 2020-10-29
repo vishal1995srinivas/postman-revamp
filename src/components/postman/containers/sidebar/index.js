@@ -14,7 +14,8 @@ class Sidebar extends Component {
 			handleDeleteCollection,
 			handleCreateCollection,
 			collections,
-			collectionName
+			collectionName,
+			handleCollectionName
 		} = this.props;
 		return (
 			<div className={sidebar}>
@@ -24,6 +25,7 @@ class Sidebar extends Component {
 					handlePlayCollection={handlePlayCollection}
 					handleDeleteCollection={handleDeleteCollection}
 					handleCreateCollection={handleCreateCollection}
+					handleCollectionName={handleCollectionName}
 					historyLoading={historyLoading}
 					requestsHistory={requestsHistory}
 				/>

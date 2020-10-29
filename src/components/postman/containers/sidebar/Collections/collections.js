@@ -3,6 +3,7 @@ import { Input } from 'semantic-ui-react';
 
 function Collections(props) {
 	const { handleCreateCollection, handleCollectionName, collectionName, result } = props;
+	console.log(props);
 	return (
 		<div className="collections">
 			<form

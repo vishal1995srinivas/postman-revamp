@@ -190,7 +190,7 @@ class Main extends Component {
 				// console.log(result);
 				/**************************** */
 				this.setState({ collections: newCollection, collectionName: '' });
-				this.props.alert.success(`Collection ${collectionName} Created successfully`);
+				// this.props.alert.success(`Collection ${collectionName} Created successfully`);
 			}
 		} else {
 			this.props.alert.error('Collection Name cannot be empty');

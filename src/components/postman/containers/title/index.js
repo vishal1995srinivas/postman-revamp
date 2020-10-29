@@ -36,7 +36,7 @@ function Title(props) {
 		this.props.history.push('/login');
 	};
 	return (
-		<div className="title">
+		<div className="urlTitle">
 			<Input
 				transparent
 				fluid

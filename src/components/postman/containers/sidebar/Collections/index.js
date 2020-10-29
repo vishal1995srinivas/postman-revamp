@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { withAlert } from 'react-alert';
+// import { withAlert } from 'react-alert';
 import LabelComponent from './label';
 import SegmentComponent from './segmentComponent';
 import Collections from './collections';
-
+import './index.css';
 class CollectionsComponent extends Component {
 	state = {
 		activeIndex: 0
@@ -31,6 +31,7 @@ class CollectionsComponent extends Component {
 	};
 
 	render() {
+		console.log(this.props);
 		const { activeIndex } = this.state;
 		//console.log(this.props.collections)
 		let result = null;
@@ -59,15 +60,35 @@ class CollectionsComponent extends Component {
 						if (requests.method === 'DELETE') {
 							color = 'red';
 						}
-						return <LabelComponent index={index} color={color} method={requests.method} title={title} />;
+						return (
+							<LabelComponent
+								key={index}
+								index={index}
+								color={color}
+								method={requests.method}
+								title={title}
+							/>
+						);
 					});
 					return (
 						<SegmentComponent
+							key={index}
 							index={index}
 							handleClick={this.handleClick}
 							handleDelete={this.handleDelete}
 							handlePlay={this.handleDelete}
 							labels={labels}
+							collectionName={collections.collectionName}
+							activeIndex={activeIndex}
+						/>
+					);
+				} else {
+					return (
+						<SegmentComponent
+							key={index}
+							index={index}
+							handleClick={this.handleClick}
+							handleDelete={this.handleDelete}
 							collectionName={collections.collectionName}
 							activeIndex={activeIndex}
 						/>
@@ -86,4 +107,5 @@ class CollectionsComponent extends Component {
 	}
 }
 
-export default withAlert()(CollectionsComponent);
+// export default withAlert()(CollectionsComponent);
+export default CollectionsComponent;
