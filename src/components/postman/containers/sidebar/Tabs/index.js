@@ -16,7 +16,7 @@ class TabsComponent extends Component {
 			handleCollectionName,
 			handleCreateCollection
 		} = this.props;
-
+		console.log(this.props);
 		const panes = [
 			{
 				menuItem: 'History',

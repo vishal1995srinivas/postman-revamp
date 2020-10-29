@@ -20,7 +20,10 @@ class HistoryComponent extends Component {
 					if (requests.title === '' || requests.title == null) {
 						title = Untitled;
 					} else {
-						title = requests.title;
+						if (requests.title.length > 10) {
+							title = requests.title.substring(0, 10);
+							title = `${title}...`;
+						} else title = requests.title;
 					}
 					if (requests.method === 'POST') {
 						color = 'yellow';

@@ -6,10 +6,27 @@ class Sidebar extends Component {
 		console.log('Clicked on close side menu');
 	};
 	render() {
-		const { sidebar, historyLoading, requestsHistory } = this.props;
+		const {
+			sidebar,
+			historyLoading,
+			handlePlayCollection,
+			requestsHistory,
+			handleDeleteCollection,
+			handleCreateCollection,
+			collections,
+			collectionName
+		} = this.props;
 		return (
 			<div className={sidebar}>
-				<TabsComponent historyLoading={historyLoading} requestsHistory={requestsHistory} />
+				<TabsComponent
+					collections={collections}
+					collectionName={collectionName}
+					handlePlayCollection={handlePlayCollection}
+					handleDeleteCollection={handleDeleteCollection}
+					handleCreateCollection={handleCreateCollection}
+					historyLoading={historyLoading}
+					requestsHistory={requestsHistory}
+				/>
 			</div>
 		);
 	}

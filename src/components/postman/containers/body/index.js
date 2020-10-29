@@ -61,7 +61,7 @@ class Body extends Component {
 							handleMethod={handleMethod}
 						/>
 					</div>
-					<div>
+					<div className="tabs">
 						<OptionsTab
 							handleBodyDataKeyChange={handleBodyDataKeyChange}
 							handleBodyDataValueChange={handleBodyDataValueChange}

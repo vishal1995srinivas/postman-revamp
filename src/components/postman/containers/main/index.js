@@ -8,6 +8,8 @@ import './index.css';
 import Title from '../title';
 import { getJwt } from '../../helpers/jwt';
 import getHistory from '../../db/getHistory';
+import getCollections from '../../db/getCollections';
+
 const { Content } = Layout;
 class Main extends Component {
 	state = {
@@ -25,20 +27,24 @@ class Main extends Component {
 		collections: [],
 		requestsHistory: [],
 		collectionName: '',
-		historyLoading: true
+		historyLoading: true,
+		sendSwitch: true,
+		ToPlay: null
 	};
 	async componentDidMount() {
 		const jwt = getJwt();
 		let userId = jwt.userId;
 		let userToken = jwt.userToken;
-		let requestHistory = await getHistory(userId, userToken);
-		let topHistory = requestHistory.requests.reverse();
-		this.setState({ requestsHistory: topHistory, historyLoading: false });
-		// let collections = await getCollections(userId, userToken);
-		// let topCollections = collections.reverse();
-		// this.setState({ ToSideBarHistory: topHistory, collections: topCollections, historyLoading: false });
+		let requestsHistory = await getHistory(userId, userToken);
+		let topHistory = requestsHistory.requests.reverse();
+		let collections = await getCollections(userId, userToken);
+		let topCollections = collections.reverse();
+		this.setState({ requestsHistory: topHistory, historyLoading: false, collections: topCollections });
 	}
 	handleSaveToCollectionName = (value) => {
+		this.setState({ collectionName: value });
+	};
+	handleCollectionName = (value) => {
 		this.setState({ collectionName: value });
 	};
 	objUpdate = (arg) => {
@@ -70,7 +76,6 @@ class Main extends Component {
 		console.log(newHeaderData);
 		this.removeExtraEntry(newHeaderData, 'header');
 	};
-
 	removeExtraEntry = (data, tab) => {
 		console.log(data);
 		let newData = data.filter((entry) => {
@@ -116,8 +121,80 @@ class Main extends Component {
 	};
 	handleSubmit = () => {
 		// jus now
-
-		this.setState({ sendLoading: true });
+		const jwt = getJwt();
+		let userId = jwt.userId;
+		let userToken = jwt.userToken;
+		const { method, url, collectionName, title, requestsHistory, headerData, bodyData, testObj } = this.state;
+		let newHistory = [ ...requestsHistory ];
+		if (collectionName === '') {
+			let newEntry = {
+				data: bodyData,
+				headers: headerData,
+				userId,
+				url,
+				method,
+				testJson: testObj,
+				title
+			};
+			newHistory.unshift(newEntry);
+			this.setState({ sendLoading: true, requestsHistory: newHistory });
+		}
+	};
+	handleDeleteCollection = async (event, index) => {
+		// try {
+		// 	/**Add delete flag dont remove from database in the next update*********** */
+		// 	const jwt = getJwt();
+		// 	let userToken = jwt.userToken;
+		// 	let CollectionToBeDeleted = this.state.collections[index];
+		// 	//console.log(CollectionToBeDeleted);
+		// 	let idOfTheCollectionIs = CollectionToBeDeleted.id;
+		// 	//console.log(idOfTheCollectionIs);
+		// 	let deleteCollection = await DeleteCollectionById(userToken, idOfTheCollectionIs);
+		// 	/******************************************************* */
+		// 	let collectionAfterDelete = this.state.collections.filter((collection) => {
+		// 		return collection.id !== idOfTheCollectionIs;
+		// 	});
+		// 	this.setState({ collections: collectionAfterDelete });
+		// 	this.props.alert.success('Collection Deleted Successfully');
+		// } catch (error) {
+		// 	console.log(error);
+		// 	this.props.alert.error('Collection cannot be deleted. Try again later!');
+		// }
+	};
+	handlePlayCollection = (index) => {
+		this.setState({ ToPlay: this.state.collections[index], sendSwitch: false });
+	};
+	handleCreateCollection = (event) => {
+		let collectionExist = false;
+		const { collectionName, collections } = this.state;
+		if (collectionName !== '') {
+			collections.map((collection) => {
+				if (collection.collectionName === collectionName) {
+					this.props.alert.error(`${collectionName} already exists`);
+					collectionExist = true;
+				}
+			});
+			if (collectionExist === false) {
+				let newCollection = [
+					{
+						collectionName: collectionName,
+						requests: []
+					},
+					...collections
+				];
+				/******************** */
+				// const jwt = getJwt();
+				// let userId = jwt.userId;
+				// let userToken = jwt.userToken;
+				// let result = createCollection(userId, userToken, collectionName);
+				// console.log(result);
+				/**************************** */
+				this.setState({ collections: newCollection, collectionName: '' });
+				this.props.alert.success(`Collection ${collectionName} Created successfully`);
+			}
+		} else {
+			this.props.alert.error('Collection Name cannot be empty');
+		}
 	};
 	handleBodyValueChange = (e, { value }) => this.setState({ bodyValue: value });
 	render() {
@@ -149,7 +226,11 @@ class Main extends Component {
 			handleBodyDataKeyChange,
 			objUpdate,
 			clearTests,
-			handleSaveToCollectionName
+			handleCreateCollection,
+			handlePlayCollection,
+			handleSaveToCollectionName,
+			handleCollectionName,
+			handleDeleteCollection
 		} = this;
 		console.log(sidebar, state, headerData);
 		return (
@@ -157,7 +238,16 @@ class Main extends Component {
 				<Layout>
 					<div className="main">
 						<div className={sidebar}>
-							<Sidebar historyLoading={historyLoading} requestsHistory={requestsHistory} />
+							<Sidebar
+								handlePlayCollection={handlePlayCollection}
+								handleDeleteCollection={handleDeleteCollection}
+								handleCreateCollection={handleCreateCollection}
+								handleCollectionName={handleCollectionName}
+								collections={collections}
+								collectionName={collectionName}
+								historyLoading={historyLoading}
+								requestsHistory={requestsHistory}
+							/>
 						</div>
 						<Content>
 							<Title handleTitle={handleTitle} />
