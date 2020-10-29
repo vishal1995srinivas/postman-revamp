@@ -87,7 +87,7 @@ class SignIn extends Component {
 	render() {
 		//console.log(this.state);
 		return (
-			<div className="form">
+			<div className="entryForm">
 				<div className="centerForm">
 					<div className="registerForm">
 						<div className="Loader">&#8734;</div>

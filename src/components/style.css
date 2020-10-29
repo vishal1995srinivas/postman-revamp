@@ -8,8 +8,23 @@
 body {
 	background: #131419;
 }
-.form {
-	display: flex;
+.entryForm {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	border: 3px solid black;
+	margin: auto;
+}
+.centerForm {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* background-color: tomato; */
+	width: 22vw;
+	height: 48vh;
 }
 
 .registerForm {
@@ -146,4 +161,22 @@ body {
 	}
 }
 @media (min-width: 320px) and (max-width: 1020px) {
+	.entryForm {
+		position: relative;
+		width: 100vw;
+		height: 100vh;
+		/* background-color: black; */
+		/* margin: auto; */
+	}
+	.centerForm {
+		/* background-color: tomato; */
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.registerForm {
+		height: 100vh;
+	}
 }
