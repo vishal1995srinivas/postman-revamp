@@ -7,3 +7,8 @@
 .exampleMethod {
 	float: right;
 }
+@media (min-width: 320px) and (max-width: 1025px) {
+	.example {
+		font-size: 2.5vw;
+	}
+}

@@ -122,7 +122,7 @@ class SignIn extends Component {
 								<div>
 									{this.state.isLoading ? (
 										<div className="inputBox">
-											<i class="fa fa-refresh fa-spin" />
+											<i className="fa fa-refresh fa-spin" />
 											<input type="submit" value="Signing In...." disabled />
 										</div>
 									) : (
