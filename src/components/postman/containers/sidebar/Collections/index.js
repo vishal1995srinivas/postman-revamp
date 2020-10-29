@@ -6,7 +6,7 @@ import Collections from './collections';
 import './index.css';
 class CollectionsComponent extends Component {
 	state = {
-		activeIndex: 0
+		activeIndex: -1
 	};
 
 	handleClick = (e, titleProps) => {
