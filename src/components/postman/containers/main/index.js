@@ -162,6 +162,7 @@ class Main extends Component {
 		// }
 	};
 	handlePlayCollection = (index) => {
+		
 		this.setState({ ToPlay: this.state.collections[index], sendSwitch: false });
 	};
 	handleCreateCollection = (event) => {

@@ -16,7 +16,7 @@ class CollectionsComponent extends Component {
 		this.setState({ activeIndex: newIndex });
 	};
 	handlePlay = (event, index) => {
-		// console.log(collectionId)
+		console.log(index);
 		this.props.handlePlayCollection(index);
 		//console.log(this.state.collections[index]);
 	};
@@ -76,7 +76,7 @@ class CollectionsComponent extends Component {
 							index={index}
 							handleClick={this.handleClick}
 							handleDelete={this.handleDelete}
-							handlePlay={this.handleDelete}
+							handlePlay={this.handlePlay}
 							labels={labels}
 							collectionName={collections.collectionName}
 							activeIndex={activeIndex}
