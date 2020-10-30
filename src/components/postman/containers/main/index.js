@@ -128,6 +128,7 @@ class Main extends Component {
 		let userId = jwt.userId;
 		let userToken = jwt.userToken;
 		let request;
+		const { collections } = this.state;
 		if (collectionName !== '' && collectionName !== null) {
 			request = {
 				userId: `${userId}`,
@@ -139,9 +140,11 @@ class Main extends Component {
 				collectionName: collectionName,
 				testJson: testObj
 			};
+
 			try {
 				let addRequest = await addRequestToCollection(request, userToken);
 				console.log(addRequest);
+
 				this.props.alert.success(`Successfully saved to ${collectionName} Collection`);
 			} catch (error) {
 				this.props.alert.error(`Error Saving to  Database`);
@@ -178,7 +181,17 @@ class Main extends Component {
 	handleSubmit = () => {
 		//TODO add to sidebar history,
 		// if GET, pass to one fn, (method, url, collName, headerData(add app/json), testObj, userToken)
-		const { method, url, collectionName, title, requestsHistory, headerData, bodyData, testObj } = this.state;
+		const {
+			method,
+			url,
+			collectionName,
+			title,
+			requestsHistory,
+			headerData,
+			bodyData,
+			testObj,
+			collections
+		} = this.state;
 		let newCollectionName;
 		let newHeaderData = headerData.slice(0, headerData.length - 1);
 		// remove application/json present if any
@@ -214,7 +227,7 @@ class Main extends Component {
 		let newHistory = [ ...requestsHistory ];
 		if (collectionName === '') {
 			let newEntry = {
-				data: bodyData,
+				data: newBodyFormData,
 				headers: newHeaderData,
 				url,
 				method,
@@ -223,6 +236,29 @@ class Main extends Component {
 			};
 			newHistory.unshift(newEntry);
 			this.setState({ sendLoading: true, requestsHistory: newHistory });
+		} else {
+			let newEntry = {
+				data: newBodyFormData,
+				headers: newHeaderData,
+				url,
+				method,
+				testJson: testObj,
+				title
+			};
+			newHistory.unshift(newEntry);
+			collections.forEach((collection) => {
+				if (collection.collectionName === collectionName) {
+					collection.requests.push({
+						title: this.state.title,
+						method: method,
+						url: url,
+						headers: headerData,
+						bodyFormOrUrlData: bodyData,
+						testCase: testObj
+					});
+				}
+			});
+			this.setState({ collections: collections, sendLoading: true, requestsHistory: newHistory });
 		}
 	};
 	handleDeleteCollection = async (event, index) => {
