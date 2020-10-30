@@ -48,6 +48,7 @@ class RadioGroup extends Component {
 							label="Raw"
 							name="radioGroup"
 							value="raw"
+							disabled
 							className="radioButton"
 							checked={bodyValue === 'raw'}
 							onChange={handleBodyValueChange}

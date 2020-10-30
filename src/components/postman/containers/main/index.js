@@ -9,7 +9,11 @@ import Title from '../title';
 import { getJwt } from '../../helpers/jwt';
 import getHistory from '../../db/getHistory';
 import getCollections from '../../db/getCollections';
-
+import addRequestToCollection from '../../db/addRequestToCollection';
+import createCollection from '../../db/createCollection';
+import deleteCollectionById from '../../db/deleteCollectionById';
+import createRequest from '../../db/createRequest';
+import { withAlert } from 'react-alert';
 const { Content } = Layout;
 class Main extends Component {
 	state = {
@@ -119,18 +123,99 @@ class Main extends Component {
 	handleUrlChange = (event) => {
 		this.setState({ url: event.target.value });
 	};
-	handleSubmit = () => {
-		// jus now
+	saveToDb = async (title, method, url, collectionName, headerData, bodyData, testObj) => {
 		const jwt = getJwt();
 		let userId = jwt.userId;
 		let userToken = jwt.userToken;
+		let request;
+		if (collectionName !== '' && collectionName !== null) {
+			request = {
+				userId: `${userId}`,
+				url: url,
+				method: method,
+				title: title,
+				headers: headerData,
+				data: bodyData,
+				collectionName: collectionName,
+				testJson: testObj
+			};
+			try {
+				let addRequest = await addRequestToCollection(request, userToken);
+				console.log(addRequest);
+				this.props.alert.success(`Successfully saved to ${collectionName} Collection`);
+			} catch (error) {
+				this.props.alert.error(`Error Saving to  Database`);
+			}
+		} else {
+			request = {
+				userId: `${userId}`,
+				url: url,
+				method: method,
+				title: title,
+				data: bodyData,
+				headers: headerData,
+				testJson: testObj
+			};
+			try {
+				let requestAdded = await createRequest(userToken, request);
+				console.log(requestAdded);
+				this.props.alert.success(`Successfully saved to Requests`);
+			} catch (error) {
+				this.props.alert.error(`Error Saving to  Database`);
+			}
+		}
+	};
+	removeExtraHeaderData = (headerData) => {
+		let newHeaderData = [ ...headerData ];
+		newHeaderData.forEach((data, index) => {
+			if (data.value === 'application/json') {
+				newHeaderData.splice(index, 1);
+				this.removeExtraHeaderData(newHeaderData);
+			}
+		});
+		return newHeaderData;
+	};
+	handleSubmit = () => {
+		//TODO add to sidebar history,
+		// if GET, pass to one fn, (method, url, collName, headerData(add app/json), testObj, userToken)
 		const { method, url, collectionName, title, requestsHistory, headerData, bodyData, testObj } = this.state;
+		let newCollectionName;
+		let newHeaderData = headerData.slice(0, headerData.length - 1);
+		// remove application/json present if any
+		newHeaderData = this.removeExtraHeaderData(newHeaderData);
+		newHeaderData.push({
+			key: 'Content-Type',
+			value: 'application/json'
+		});
+		if (collectionName === '') {
+			newCollectionName = null;
+		} else newCollectionName = collectionName;
+
+		const { bodyValue } = this.state;
+		let newBodyFormData = null;
+		if (bodyValue !== 'none' && method !== 'GET') {
+			newBodyFormData = bodyData.slice(0, bodyData.length - 1);
+		} else if (bodyValue === 'data') {
+			newHeaderData.push({
+				key: 'Content-Type',
+				value: 'multipart/form-data'
+			});
+		} else if (bodyValue === 'url-encoded') {
+			newHeaderData.push({
+				key: 'Content-Type',
+				value: 'application/x-www-form-urlencoded'
+			});
+		} else if (bodyValue === 'raw') {
+		}
+		this.saveToDb(title, method, url, newCollectionName, newHeaderData, newBodyFormData, testObj);
+
+		// if POST, pass to one fn, (method, url, collName, headerData(add app/json), testObj, userToken)
+		// jus now
 		let newHistory = [ ...requestsHistory ];
 		if (collectionName === '') {
 			let newEntry = {
 				data: bodyData,
-				headers: headerData,
-				userId,
+				headers: newHeaderData,
 				url,
 				method,
 				testJson: testObj,
@@ -162,7 +247,6 @@ class Main extends Component {
 		// }
 	};
 	handlePlayCollection = (index) => {
-		
 		this.setState({ ToPlay: this.state.collections[index], sendSwitch: false });
 	};
 	handleCreateCollection = (event) => {
@@ -284,4 +368,4 @@ class Main extends Component {
 		);
 	}
 }
-export default Main;
+export default withAlert()(Main);
