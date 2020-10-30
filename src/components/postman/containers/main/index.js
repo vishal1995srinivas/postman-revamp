@@ -66,6 +66,16 @@ class Main extends Component {
 		console.log(newBodyData);
 		this.removeExtraEntry(newBodyData, 'body');
 	};
+	handleHistoryClick = (url, method, title, data, headers, testJson) => {
+		console.log(url, method, title, data, headers, testJson);
+		this.setState({
+			url: url,
+			method: method,
+			title: title,
+
+			testObj: testJson
+		});
+	};
 	handleBodyDataValueChange = (event, index) => {
 		const { bodyData } = this.state;
 		let newBodyData = [ ...bodyData ];
@@ -335,6 +345,7 @@ class Main extends Component {
 		} = this.state;
 		const {
 			onClickSidebarIcon,
+			handleHistoryClick,
 			state,
 			handleHeaderDataValueChange,
 			handleHeaderDataKeyChange,
@@ -360,6 +371,7 @@ class Main extends Component {
 					<div className="main">
 						<div className={sidebar}>
 							<Sidebar
+								handleHistoryClick={handleHistoryClick}
 								handlePlayCollection={handlePlayCollection}
 								handleDeleteCollection={handleDeleteCollection}
 								handleCreateCollection={handleCreateCollection}

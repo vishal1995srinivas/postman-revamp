@@ -24,7 +24,11 @@ class TabsComponent extends Component {
 				render: () => (
 					<Tab.Pane inverted attached={false}>
 						<div className="tabPane">
-							<HistoryComponent historyLoading={historyLoading} requestsHistory={requestsHistory} />
+							<HistoryComponent
+								handleHistoryClick={handleHistoryClick}
+								historyLoading={historyLoading}
+								requestsHistory={requestsHistory}
+							/>
 						</div>
 					</Tab.Pane>
 				)

@@ -14,12 +14,14 @@ class Sidebar extends Component {
 			handleDeleteCollection,
 			handleCreateCollection,
 			collections,
+			handleHistoryClick,
 			collectionName,
 			handleCollectionName
 		} = this.props;
 		return (
 			<div className={sidebar}>
 				<TabsComponent
+					handleHistoryClick={handleHistoryClick}
 					collections={collections}
 					collectionName={collectionName}
 					handlePlayCollection={handlePlayCollection}
