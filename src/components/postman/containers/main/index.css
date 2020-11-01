@@ -25,9 +25,10 @@
 }
 
 .ant-layout-content {
-	background: #16213e;
+	background: #1b1c1d;
 	color: #fff;
 	min-height: 85vh !important;
+	border: 2px solid black;
 }
 [data-theme="dark"] .ant-layout-content {
 	background: #107bcb;

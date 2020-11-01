@@ -4,7 +4,8 @@
 
 .bodyContent {
 	min-height: 44vh;
-	border: 2px solid black;
+	border-bottom: 4px solid black;
+
 	background: #1b1c1d;
 	overflow-y: scroll;
 	overflow-x: hidden;

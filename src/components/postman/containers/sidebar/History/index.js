@@ -20,8 +20,8 @@ class HistoryComponent extends Component {
 					if (requests.title === '' || requests.title == null) {
 						title = Untitled;
 					} else {
-						if (requests.title.length > 10) {
-							title = requests.title.substring(0, 10);
+						if (requests.title.length > 16) {
+							title = requests.title.substring(0, 16);
 							title = `${title}...`;
 						} else title = requests.title;
 					}

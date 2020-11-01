@@ -11,7 +11,7 @@ import getHistory from '../../db/getHistory';
 import getCollections from '../../db/getCollections';
 import addRequestToCollection from '../../db/addRequestToCollection';
 import createCollection from '../../db/createCollection';
-import deleteCollectionById from '../../db/deleteCollectionById';
+import DeleteCollectionById from '../../db/deleteCollectionById';
 import createRequest from '../../db/createRequest';
 import { withAlert } from 'react-alert';
 const { Content } = Layout;
@@ -20,6 +20,7 @@ class Main extends Component {
 		sidebar: 'sidebar',
 		title: '',
 		method: 'GET',
+		responseSwitch: false,
 		url: '',
 		//send button
 		sendLoading: false,
@@ -57,6 +58,9 @@ class Main extends Component {
 	clearTests = () => {
 		this.setState({ testObj: null });
 	};
+	toggleToPlayOff = () => {
+		this.setState({ ToPlay: null });
+	};
 	handleBodyDataKeyChange = (event, index) => {
 		console.log('object');
 		const { bodyData } = this.state;
@@ -71,9 +75,7 @@ class Main extends Component {
 		this.setState({
 			url: url,
 			method: method,
-			title: title,
-
-			testObj: testJson
+			title: title
 		});
 	};
 	handleBodyDataValueChange = (event, index) => {
@@ -188,6 +190,9 @@ class Main extends Component {
 		});
 		return newHeaderData;
 	};
+	sendLoadingSwitch = () => {
+		this.setState({ sendLoading: false });
+	};
 	handleSubmit = () => {
 		//TODO add to sidebar history,
 		// if GET, pass to one fn, (method, url, collName, headerData(add app/json), testObj, userToken)
@@ -200,7 +205,8 @@ class Main extends Component {
 			headerData,
 			bodyData,
 			testObj,
-			collections
+			collections,
+			responseSwitch
 		} = this.state;
 		let newCollectionName;
 		let newHeaderData = headerData.slice(0, headerData.length - 1);
@@ -230,7 +236,7 @@ class Main extends Component {
 			});
 		} else if (bodyValue === 'raw') {
 		}
-		this.saveToDb(title, method, url, newCollectionName, newHeaderData, newBodyFormData, testObj);
+		//this.saveToDb(title, method, url, newCollectionName, newHeaderData, newBodyFormData, testObj);
 
 		// if POST, pass to one fn, (method, url, collName, headerData(add app/json), testObj, userToken)
 		// jus now
@@ -245,7 +251,12 @@ class Main extends Component {
 				title
 			};
 			newHistory.unshift(newEntry);
-			this.setState({ sendLoading: true, requestsHistory: newHistory });
+			this.setState({
+				sendLoading: true,
+				responseSwitch: true,
+				headerData: newHeaderData,
+				requestsHistory: newHistory
+			});
 		} else {
 			let newEntry = {
 				data: newBodyFormData,
@@ -268,29 +279,36 @@ class Main extends Component {
 					});
 				}
 			});
-			this.setState({ collections: collections, sendLoading: true, requestsHistory: newHistory });
+			this.setState({
+				collections: collections,
+				headerData: newHeaderData,
+				sendLoading: true,
+				requestsHistory: newHistory,
+				responseSwitch: true
+			});
 		}
 	};
 	handleDeleteCollection = async (event, index) => {
-		// try {
-		// 	/**Add delete flag dont remove from database in the next update*********** */
-		// 	const jwt = getJwt();
-		// 	let userToken = jwt.userToken;
-		// 	let CollectionToBeDeleted = this.state.collections[index];
-		// 	//console.log(CollectionToBeDeleted);
-		// 	let idOfTheCollectionIs = CollectionToBeDeleted.id;
-		// 	//console.log(idOfTheCollectionIs);
-		// 	let deleteCollection = await DeleteCollectionById(userToken, idOfTheCollectionIs);
-		// 	/******************************************************* */
-		// 	let collectionAfterDelete = this.state.collections.filter((collection) => {
-		// 		return collection.id !== idOfTheCollectionIs;
-		// 	});
-		// 	this.setState({ collections: collectionAfterDelete });
-		// 	this.props.alert.success('Collection Deleted Successfully');
-		// } catch (error) {
-		// 	console.log(error);
-		// 	this.props.alert.error('Collection cannot be deleted. Try again later!');
-		// }
+		try {
+			/**Add delete flag dont remove from database in the next update*********** */
+			const jwt = getJwt();
+			let userToken = jwt.userToken;
+			let CollectionToBeDeleted = this.state.collections[index];
+			//console.log(CollectionToBeDeleted);
+			let idOfTheCollectionIs = CollectionToBeDeleted.id;
+			//console.log(idOfTheCollectionIs);
+			let deleteCollection = await DeleteCollectionById(userToken, idOfTheCollectionIs);
+			/******************************************************* */
+			console.log(deleteCollection);
+			let collectionAfterDelete = this.state.collections.filter((collection) => {
+				return collection.id !== idOfTheCollectionIs;
+			});
+			this.setState({ collections: collectionAfterDelete });
+			this.props.alert.success('Collection Deleted Successfully');
+		} catch (error) {
+			console.log(error);
+			this.props.alert.error('Collection cannot be deleted. Try again later!');
+		}
 	};
 	handlePlayCollection = (index) => {
 		this.setState({ ToPlay: this.state.collections[index], sendSwitch: false });
@@ -314,14 +332,14 @@ class Main extends Component {
 					...collections
 				];
 				/******************** */
-				// const jwt = getJwt();
-				// let userId = jwt.userId;
-				// let userToken = jwt.userToken;
-				// let result = createCollection(userId, userToken, collectionName);
-				// console.log(result);
+				const jwt = getJwt();
+				let userId = jwt.userId;
+				let userToken = jwt.userToken;
+				let result = createCollection(userId, userToken, collectionName);
+				console.log(result);
 				/**************************** */
 				this.setState({ collections: newCollection, collectionName: '' });
-				// this.props.alert.success(`Collection ${collectionName} Created successfully`);
+				this.props.alert.success(`Collection ${collectionName} Created successfully`);
 			}
 		} else {
 			this.props.alert.error('Collection Name cannot be empty');
@@ -341,11 +359,16 @@ class Main extends Component {
 			sendLoading,
 			headerData,
 			historyLoading,
-			requestsHistory
+			requestsHistory,
+			sendSwitch,
+			responseSwitch,
+			ToPlay
 		} = this.state;
 		const {
 			onClickSidebarIcon,
+			toggleToPlayOff,
 			handleHistoryClick,
+			sendLoadingSwitch,
 			state,
 			handleHeaderDataValueChange,
 			handleHeaderDataKeyChange,
@@ -408,7 +431,18 @@ class Main extends Component {
 								bodyData={bodyData}
 								handleBodyValueChange={handleBodyValueChange}
 							/>
-							<Response />
+							<Response
+								sendSwitch={sendSwitch}
+								method={method}
+								url={url}
+								headers={headerData}
+								bodyFormOrUrlData={bodyData}
+								ToPlay={ToPlay}
+								ToggleToPlayOff={toggleToPlayOff}
+								testCase={testObj}
+								responseSwitch={responseSwitch}
+								SendLoadingSwitch={sendLoadingSwitch}
+							/>
 						</Content>
 					</div>
 				</Layout>
