@@ -440,6 +440,7 @@ class Main extends Component {
 								ToPlay={ToPlay}
 								ToggleToPlayOff={toggleToPlayOff}
 								testCase={testObj}
+								sendLoading={sendLoading}
 								responseSwitch={responseSwitch}
 								SendLoadingSwitch={sendLoadingSwitch}
 							/>

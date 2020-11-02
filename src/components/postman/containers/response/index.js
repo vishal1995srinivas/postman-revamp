@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import Tests from './Tests';
+import ReactJson from 'react-json-view';
 import ResponseTabComponent from './ResponseTabComponent';
 import DisplayReplica from './testCollection/DisplayReplica';
 import './index.css';
+import { theme } from './Utils';
 class Response extends Component {
+	state = {
+		data: null
+	};
+	setResponse = (res) => {
+		this.setState({ data: res });
+	};
 	render() {
 		const {
 			sendSwitch,
+			sendLoading,
 			testCase,
 			method,
 			ToPlay,
@@ -16,40 +25,53 @@ class Response extends Component {
 			responseSwitch,
 			SendLoadingSwitch
 		} = this.props;
-		if (responseSwitch === true && url !== '') {
-			if (sendSwitch === true) {
-				if (testCase !== null && testCase !== 'null' && testCase !== '') {
-					return (
-						<div className="response">
-							<Tests
-								testCase={testCase}
-								method={method}
-								url={url}
-								headers={headers}
-								bodyFormOrUrlData={bodyFormOrUrlData}
-								SendLoadingSwitch={SendLoadingSwitch}
-							/>
-						</div>
-					);
+		const { data } = this.state;
+		const { setResponse } = this;
+		// responseSwitch == false -> uri type, true-> response
+
+		if (data !== null || sendLoading === true) {
+			if (sendLoading === true) {
+				if (sendSwitch === true) {
+					if (testCase !== null && testCase !== 'null' && testCase !== '') {
+						return (
+							<div className="response">
+								<Tests
+									testCase={testCase}
+									method={method}
+									url={url}
+									headers={headers}
+									bodyFormOrUrlData={bodyFormOrUrlData}
+									SendLoadingSwitch={SendLoadingSwitch}
+								/>
+							</div>
+						);
+					} else {
+						console.log(this.props);
+						return (
+							<div className="response">
+								<ResponseTabComponent
+									setResponse={setResponse}
+									method={method}
+									url={url}
+									headers={headers}
+									bodyFormOrUrlData={bodyFormOrUrlData}
+									SendLoadingSwitch={SendLoadingSwitch}
+								/>
+							</div>
+						);
+					}
 				} else {
-					console.log(this.props);
+					//console.log(this.props.ToPlay);
 					return (
 						<div className="response">
-							<ResponseTabComponent
-								method={method}
-								url={url}
-								headers={headers}
-								bodyFormOrUrlData={bodyFormOrUrlData}
-								SendLoadingSwitch={SendLoadingSwitch}
-							/>
+							<DisplayReplica ToPlay={ToPlay} />
 						</div>
 					);
 				}
 			} else {
-				//console.log(this.props.ToPlay);
 				return (
-					<div className="response">
-						<DisplayReplica ToPlay={ToPlay} />
+					<div className="responseContent" align="left">
+						<ReactJson src={data} theme={theme} />
 					</div>
 				);
 			}

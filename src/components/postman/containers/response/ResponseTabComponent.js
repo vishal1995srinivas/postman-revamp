@@ -32,6 +32,7 @@ class ResponseTabComponent extends Component {
 		) {
 			let fetchData = await fetchFunction(method, headers, url, bodyFormOrUrlData);
 			console.log('fetch data', fetchData);
+			this.props.setResponse(fetchData);
 			this.props.SendLoadingSwitch();
 			this.setState({
 				isLoading: false,
@@ -55,6 +56,7 @@ class ResponseTabComponent extends Component {
 		) {
 			let fetchData = await fetchFunction(method, headers, url, bodyFormOrUrlData);
 			console.log('fetch data', fetchData);
+			this.props.setResponse(fetchData);
 			this.props.SendLoadingSwitch();
 			this.setState({
 				isLoading: false,
