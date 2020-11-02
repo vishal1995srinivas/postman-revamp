@@ -36,6 +36,7 @@ class Response extends Component {
 						return (
 							<div className="response">
 								<Tests
+									setResponse={setResponse}
 									testCase={testCase}
 									method={method}
 									url={url}

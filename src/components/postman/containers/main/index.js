@@ -216,15 +216,15 @@ class Main extends Component {
 			key: 'Content-Type',
 			value: 'application/json'
 		});
+		// body Data
+		let newBodyFormData = bodyData.slice(0, bodyData.length - 1);
+		console.log(newBodyFormData);
 		if (collectionName === '') {
 			newCollectionName = null;
 		} else newCollectionName = collectionName;
 
 		const { bodyValue } = this.state;
-		let newBodyFormData = null;
-		if (bodyValue !== 'none' && method !== 'GET') {
-			newBodyFormData = bodyData.slice(0, bodyData.length - 1);
-		} else if (bodyValue === 'data') {
+		if (bodyValue === 'data') {
 			newHeaderData.push({
 				key: 'Content-Type',
 				value: 'multipart/form-data'
@@ -254,6 +254,7 @@ class Main extends Component {
 			this.setState({
 				sendLoading: true,
 				responseSwitch: true,
+				bodyData: newBodyFormData,
 				headerData: newHeaderData,
 				requestsHistory: newHistory
 			});
@@ -279,11 +280,13 @@ class Main extends Component {
 					});
 				}
 			});
+			console.log(newBodyFormData);
 			this.setState({
 				collections: collections,
 				headerData: newHeaderData,
 				sendLoading: true,
 				requestsHistory: newHistory,
+				bodyData: newBodyFormData,
 				responseSwitch: true
 			});
 		}
@@ -388,6 +391,10 @@ class Main extends Component {
 			handleDeleteCollection
 		} = this;
 		console.log(sidebar, state, headerData);
+		let testJson;
+		if (testObj === null) {
+			testJson = testObj;
+		} else testJson = testObj.jsObject;
 		return (
 			<div>
 				<Layout>
@@ -411,7 +418,7 @@ class Main extends Component {
 								collectionName={collectionName}
 								handleSaveToCollectionName={handleSaveToCollectionName}
 								collections={collections}
-								testObj={testObj}
+								testObj={testJson}
 								objUpdate={objUpdate}
 								clearTests={clearTests}
 								handleBodyDataKeyChange={handleBodyDataKeyChange}
@@ -439,7 +446,7 @@ class Main extends Component {
 								bodyFormOrUrlData={bodyData}
 								ToPlay={ToPlay}
 								ToggleToPlayOff={toggleToPlayOff}
-								testCase={testObj}
+								testCase={testJson}
 								sendLoading={sendLoading}
 								responseSwitch={responseSwitch}
 								SendLoadingSwitch={sendLoadingSwitch}

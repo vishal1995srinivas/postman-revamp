@@ -19,6 +19,7 @@ const fetchFunction = async (method, headers, url, bodyFormOrUrlData) => {
 			data = await GetData(`${newUrl}`, method, myHeaders);
 		} else {
 			data = await fetchData(`${newUrl}`, bodyFormOrUrlData, method, myHeaders);
+			console.log(data);
 		}
 		return data;
 	} catch (error) {

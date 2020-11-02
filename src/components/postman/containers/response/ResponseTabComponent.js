@@ -70,29 +70,6 @@ class ResponseTabComponent extends Component {
 		}
 	}
 
-	// static getDerivedStateFromProps = async (props, state) => {
-	// 	console.log('executing sgdsfp');
-	// 	const { method, url, headers, bodyFormOrUrlData } = props;
-	// 	if (
-	// 		method !== state.method ||
-	// 		url !== state.url ||
-	// 		headers !== state.headers ||
-	// 		bodyFormOrUrlData !== state.bodyFormOrUrlData
-	// 	) {
-	// 		let fetchData = await fetchFunction(method, headers, url, bodyFormOrUrlData);
-	// 		console.log('fetch data', fetchData);
-	// 		return {
-	// 			isLoading: false,
-	// 			urlString: url,
-	// 			error: null,
-	// 			JsonData: fetchData,
-	// 			headers: headers,
-	// 			method: method,
-	// 			bodyFormOrUrlData: bodyFormOrUrlData
-	// 		};
-	// 	}
-	// 	return null;
-	// };
 	render() {
 		const { url } = this.props;
 		console.log(this.props, this.state);
@@ -100,7 +77,7 @@ class ResponseTabComponent extends Component {
 		if (isLoading === true) {
 			return (
 				<div>
-					<Skeleton count={10} color="#1b1c1d" width="100%" animated={false} />
+					<Skeleton count={10} color="#2b2b2b" width="100%" animated={false} />
 					{/* <Loader type="ThreeDots" color="black" height={100} width={100} /> */}
 				</div>
 			);

@@ -6,7 +6,6 @@
 	align-content: center;
 	background: #1b1c1d;
 	overflow: scroll;
-	border: 2px solid black;
 }
 .responseContent {
 	overflow: scroll;
