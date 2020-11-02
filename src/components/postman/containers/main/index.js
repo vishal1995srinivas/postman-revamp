@@ -236,7 +236,7 @@ class Main extends Component {
 			});
 		} else if (bodyValue === 'raw') {
 		}
-		//this.saveToDb(title, method, url, newCollectionName, newHeaderData, newBodyFormData, testObj);
+		this.saveToDb(title, method, url, newCollectionName, newHeaderData, newBodyFormData, testObj);
 
 		// if POST, pass to one fn, (method, url, collName, headerData(add app/json), testObj, userToken)
 		// jus now

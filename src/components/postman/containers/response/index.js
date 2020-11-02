@@ -7,10 +7,14 @@ import './index.css';
 import { theme } from './Utils';
 class Response extends Component {
 	state = {
-		data: null
+		data: null,
+		collectionData: null
 	};
 	setResponse = (res) => {
 		this.setState({ data: res });
+	};
+	setCollectionData = (data) => {
+		this.setState({ collectionData: data });
 	};
 	render() {
 		const {
@@ -25,8 +29,8 @@ class Response extends Component {
 			responseSwitch,
 			SendLoadingSwitch
 		} = this.props;
-		const { data } = this.state;
-		const { setResponse } = this;
+		const { data, collectionData } = this.state;
+		const { setResponse, setCollectionData } = this;
 		// responseSwitch == false -> uri type, true-> response
 
 		if (data !== null || sendLoading === true) {
@@ -76,6 +80,13 @@ class Response extends Component {
 					</div>
 				);
 			}
+		} else if (collectionData !== null || ToPlay !== null) {
+			console.log(this.props.ToPlay);
+			return (
+				<div className="response">
+					<DisplayReplica ToPlay={ToPlay} setCollectionData={setCollectionData} />
+				</div>
+			);
 		} else {
 			console.log(this.props);
 			return (

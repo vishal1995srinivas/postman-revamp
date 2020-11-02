@@ -6,22 +6,17 @@ import { withAlert } from 'react-alert';
 import { diff } from 'json-diff';
 import Skeleton from 'react-skeleton-loader';
 import { theme } from '../Utils';
-
+import '../index.css';
 class Display extends Component {
-	constructor(props) {
-		super(props);
-		const alert = this.props.alert;
-		this.ClickHandler = this.ClickHandler.bind(this);
-		// this.highlightSyntax = this.highlightSyntax.bind(this);
-		this.state = {
-			result: [],
-			requests: [],
-			collectionName: null,
-			collectionsRequestsLength: null,
-			loading: false
-		};
-	}
-	ClickHandler() {
+	state = {
+		result: [],
+		requests: [],
+		collectionName: null,
+		collectionsRequestsLength: null,
+		loading: false
+	};
+
+	ClickHandler = () => {
 		let newResult = [];
 		for (let request of this.props.ToPlay.requests) {
 			console.log(request);
@@ -79,58 +74,75 @@ class Display extends Component {
 				}
 			}
 		}
-	}
-	render() {
-		//console.log(this.props.ToPlay);
+	};
+	componentDidMount() {
 		if (
 			this.state.collectionName !== this.props.ToPlay.name &&
 			this.state.collectionsRequestsLength !== this.props.ToPlay.requests.length
 		) {
 			this.ClickHandler();
-			return (
-				<div className="response_tests">
-					<Skeleton count={50} color="#1b1c1d" width="100%" />
-					{/* <div className="Loader">&#8734;</div> */}
+		}
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if (
+			this.state.collectionName !== this.props.ToPlay.name &&
+			this.state.collectionsRequestsLength !== this.props.ToPlay.requests.length
+		) {
+			this.ClickHandler();
+		}
+	}
 
-					{/* <Button onClick={this.ClickHandler} secondary>
-						Click Here to get Test Results
-					</Button> */}
+	render() {
+		//console.log(this.props.ToPlay);
+		// if (
+		// 	this.state.collectionName !== this.props.ToPlay.name &&
+		// 	this.state.collectionsRequestsLength !== this.props.ToPlay.requests.length
+		// ) {
+		// 	this.ClickHandler();
+		// 	return (
+		// 		<div className="response_tests">
+		// 			<Skeleton count={10} color="#2b2b2b" width="100%" />
+		// 			{/* <div className="Loader">&#8734;</div> */}
+
+		// 			{/* <Button onClick={this.ClickHandler} secondary>
+		// 				Click Here to get Test Results
+		// 			</Button> */}
+		// 		</div>
+		// 	);
+		// } else {
+		// 	//console.log(this.state.loading);
+		// 	//console.log(this.state.result);
+		if (this.state.loading) {
+			let loading = this.state.result.map((result, index) => {
+				return (
+					<div className="response_tests" key={index} align="left">
+						{result}
+					</div>
+				);
+			});
+			return (
+				<div className="testResponse" align="left">
+					<div>{loading}</div>
 				</div>
 			);
 		} else {
-			//console.log(this.state.loading);
-			//console.log(this.state.result);
-			if (this.state.loading) {
-				let loading = this.state.result.map((result, index) => {
-					return (
-						<div className="response_tests" key={index} align="left">
-							{result}
-						</div>
-					);
-				});
+			let loading = this.state.result.map((result, index) => {
 				return (
-					<div align="left">
-						<div>{loading}</div>
+					<div className="testResponse" key={index} align="left">
+						{result}
 					</div>
 				);
-			} else {
-				let loading = this.state.result.map((result, index) => {
-					return (
-						<div key={index} align="left">
-							{result}
-						</div>
-					);
-				});
-				return (
-					<div align="left">
-						<div className="instructions">
-							Test Results are as follows: <br>__new: TestCase data, __old: Fetched data</br>
-						</div>
-						<ReactJson src={loading} theme={theme} />
+			});
+			return (
+				<div align="left">
+					<div className="instructions">
+						Test Results are as follows: <br />__new: TestCase data, __old: Fetched data
 					</div>
-				);
-			}
+					<ReactJson src={loading} theme={theme} />
+				</div>
+			);
 		}
 	}
+	// }
 }
 export default withAlert()(Display);

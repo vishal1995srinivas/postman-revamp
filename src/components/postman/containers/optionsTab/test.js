@@ -28,7 +28,7 @@ class Tests extends Component {
 					id="123"
 					width="100%"
 					height="20vh"
-					waitAfterKeyPress={2000}
+					waitAfterKeyPress={1300}
 					colors={{ background: 'black' }}
 					onChange={(arg) => {
 						objUpdate(arg);
