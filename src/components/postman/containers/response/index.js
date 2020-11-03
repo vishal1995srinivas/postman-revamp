@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Tests from './Tests';
 import ReactJson from 'react-json-view';
 import ResponseTabComponent from './ResponseTabComponent';
-import DisplayReplica from './testCollection/DisplayReplica';
+import PlayCollections from './testCollection/PlayCollections';
 import './index.css';
 import { theme } from './Utils';
 class Response extends Component {
@@ -69,7 +69,7 @@ class Response extends Component {
 					//console.log(this.props.ToPlay);
 					return (
 						<div className="response">
-							<DisplayReplica ToPlay={ToPlay} />
+							<PlayCollections ToPlay={ToPlay} />
 						</div>
 					);
 				}
@@ -84,7 +84,7 @@ class Response extends Component {
 			console.log(this.props.ToPlay);
 			return (
 				<div className="response">
-					<DisplayReplica ToPlay={ToPlay} setCollectionData={setCollectionData} />
+					<PlayCollections ToPlay={ToPlay} setCollectionData={setCollectionData} />
 				</div>
 			);
 		} else {

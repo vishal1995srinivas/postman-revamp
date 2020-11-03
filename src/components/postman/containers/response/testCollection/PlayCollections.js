@@ -7,7 +7,7 @@ import { diff } from 'json-diff';
 import Skeleton from 'react-skeleton-loader';
 import { theme } from '../Utils';
 import '../index.css';
-class Display extends Component {
+class PlayCollections extends Component {
 	state = {
 		result: [],
 		requests: [],
@@ -145,4 +145,4 @@ class Display extends Component {
 	}
 	// }
 }
-export default withAlert()(Display);
+export default withAlert()(PlayCollections);
