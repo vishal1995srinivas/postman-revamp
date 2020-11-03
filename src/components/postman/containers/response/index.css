@@ -11,13 +11,9 @@
 	overflow: scroll;
 	height: 40vh;
 }
-.response_tests {
-	overflow: scroll;
-	border: 1px solid black;
-}
+
 .responseContent {
-	overflow: scroll;
-	height: 40vh;
+	overflow: hidden;
 }
 .loaderText {
 	text-align: center;

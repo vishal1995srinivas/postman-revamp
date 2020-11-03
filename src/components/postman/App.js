@@ -5,6 +5,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import AppHeader from './components/AppHeader';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import './App.css';
+import FooterComponent from "./components/AppFooter";
 const { Header, Footer } = Layout;
 const options = {
 	// you can also just use 'bottom center'
@@ -20,7 +21,7 @@ function App() {
 			<AlertProvider template={AlertTemplate} {...options}>
 				<Layout>
 					<Main />
-					<Footer>Footer</Footer>
+					<Footer><FooterComponent/></Footer>
 				</Layout>
 			</AlertProvider>
 		</div>
