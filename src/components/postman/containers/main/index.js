@@ -75,7 +75,9 @@ class Main extends Component {
 		this.setState({
 			url: url,
 			method: method,
-			title: title
+			title: title,
+			headerData: [ { key: '', value: '' } ],
+			bodyData: [ { key: '', value: '' } ]
 		});
 	};
 	handleBodyDataValueChange = (event, index) => {
